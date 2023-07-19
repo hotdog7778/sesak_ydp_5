@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form & Input tag</title>
+</head>
+<body>
+    <h1> 폼 태그 종류에 대해 알아보자 </h1>
+
+    <!-- 
+        form tag : 사용자로부터 입력받는 요소(input, select, textarea)들을 감싸는 태그 
+        속성으로 action, method 가 있습니다.
+    -->
+    <form>
+        <!-- 모든 input type에는 name 속성을 가질 수 있습니다. -->
+        Text <input type="text">
+        <br>Text <input type="text" disabled>
+        
+        <br>
+        <label for="same">이메일</label>
+        <input type="email" id="same" placeholder="이메일을 입력해주세요">
+
+        <br>
+        <textarea cols="20" rows="5" placeholder="문의사항을 입력해주세요"></textarea>
+
+        <br>
+        <input type="color" >
+        <br>
+        <input type="range" >
+        <br>
+        <input type="file" >
+        <br>
+        <input type="number" >
+        <br>
+        <input type="date" >
+        <br>
+        <input type="datetime-local" >
+
+        <br>
+        <h5>당신의 취미는?</h5>
+        <input type="checkbox" name="interest" value="1" checked>배드민턴
+        <input type="checkbox" name="interest" value="2">농구
+        <input type="checkbox" name="interest" value="3">영화보기
+        <input type="checkbox" name="interest" value="4">누워있기
+        
+        <br>
+        <h5>당신의 성별은?</h5>
+        <input type="radio" name="gender" value="f" id="genderF" checked> <label for="genderF">여자</label>
+        <input type="radio" name="gender" value="m" id="genderM"> <label for="genderM">남자</label>
+
+        <br>
+        <input type="button" value="버튼1">
+        <button>버튼2</button>
+
+        <br>
+        <input type="submit" value="제출1">
+        <button type="submit">제출2</button>
+
+        <br>
+        <select name="flower" >
+            <optgroup label="첫번째 그룹">
+                <option value="a">장미</option>
+                <option value="b">동백</option>
+                <option value="c" selected>몰라</option>
+            </optgroup>
+            <optgroup label="두번째 그룹">
+                <option value="a">장미</option>
+                <option value="b">동백</option>
+                <option value="c" selected>몰라</option>
+            </optgroup>
+        </select>
+
+    </form>
+</body>
+</html>
