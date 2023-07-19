@@ -18,7 +18,7 @@
 * 0.1.1
     * 오리엔테이션 / Github / Git / 블로깅
 * 0.1.2
-    * Html / CSS / JavaScript
+    * Html
 * 0.1.3
     * ex
 * 0.2.1
