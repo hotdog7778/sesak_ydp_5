@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- border 붉은 글씨인 이유는 CSS에서 정의하는게 바람직하기 때문입니다. -->
+    <table border="1" width="150" height="150" align="center" bgcolor="skyblue" bordercolor="red">
+        <caption>
+            <h3>My table</h3>
+        </caption>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+
+    <!-- cellspacing cellpadding -->
+    <table border="1" cellspacing="10" cellpadding="20" >
+        <tr>
+            <th>메뉴</th>
+            <th>가격</th>
+            <th>비고</th>
+        </tr>
+        <tr>
+            <td>국물떡볶이</td>
+            <td>5000</td>
+            <td>2인 이상 주문 가능</td>
+        </tr>
+        <tr>
+            <td>참치김밥</td>
+            <td>4000</td>
+            <td>x</td>
+        </tr>
+        <tr>
+            <td>치즈김밥</td>
+            <td>4000</td>
+            <td>간, 허파 있음</td>
+        </tr>
+    </table>
+
+    <hr>
+    <h1>가격표 NEW</h1>
+    <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>메뉴</th>
+            <th>가격</th>
+            <th>비고</th>
+        </tr>
+        <tr>
+            <td>국물떡볶이</td>
+            <td>5000</td>
+            <td>2인 이상 주문 가능</td>
+        </tr>
+        <tr>
+        <!-- 
+            colspan: 가로 합치기    
+            rowspan: 세로 합치기
+        -->
+            <td>참치김밥</td>
+            <td rowspan="2">4000</td>
+            <td>x</td>
+        </tr>
+        <tr>
+            <td>치즈김밥</td>
+            <!-- <td>4000</td> -->
+            <td>신메뉴</td>
+        </tr>
+        <tr>
+            <td colspan="3">순대(품절)</td>
+            <!-- <td colspan="2">-</td> -->
+            <!-- <td></td> -->
+        </tr>
+        
+    </table>
+
+</body>
+</html>
