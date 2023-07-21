@@ -1,0 +1,35 @@
+/* 야생의 사자 -배경 red */
+p.lion {
+background-color: red;
+}
+
+/* 사파리 안의 사자만 선택 */
+.zoo ul .lion {
+background-color: greenyellow;
+}
+
+/* 호랑이 선택 */
+#tiger {
+background-color: yellow;
+}
+
+/* 모든 사자 선택 */
+.lion {
+color: sienna;
+}
+
+/* 동물원 안의 사자 선택 */
+.zoo .lion {
+font-weight: bold;
+}
+
+/* 사육사 allie 를 선택 */
+.zoo > ul > li.lion + li {
+/* li.lion이 아닌 .lion+li를 한다면 사육사 뿐만 아니라 사자2도 선택됨 */
+background-color: skyblue;
+}
+
+/* 사파리 사자 뒤에 있는 사육사를 모두 선택 */
+.zoo li.lion ~ li {
+color: gray;
+}

@@ -1,0 +1,19 @@
+* {
+    color: white;
+}
+
+span {
+    background-color: red;
+}
+
+body {
+    background-color: gray;
+}
+
+#first {
+    background-color: blue;
+}
+
+.second {
+    background-color: green;
+}

@@ -1,0 +1,70 @@
+body {
+    /* 
+        웹 폰트
+        - 모든 브라우저에서 보는 폰트를 통일 하기위해 사용합니다.
+        - 폰트를 다운로드하는 것이 아니라 link 태그의 주소에서 폰트를 가져오는 방식 입니다.
+        - 보통 기본 폰트는 body 태그에 작성합니다.
+    */
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+div {
+    /* 색상 */
+    
+    color: green;
+    
+    background-color: pink;
+    
+    /* 
+    그라데이션 
+     - 수직 background: linear-gradient(blue,pink);
+     - 수평 background: linear-gradient(to right, blue,pink);
+     - 기울기 background: linear-gradient(70deg, blue,pink);
+    */
+
+    /* 폰트 */
+    font-size: 25px;
+    font-weight: 400;
+    font-style: italic;
+
+    /* 정렬 */
+    text-align: center;
+    /* text-align: justify; */
+
+    /* 글자 선 */
+    /* text-decoration: overline; */
+    text-decoration: underline;
+
+    /* 줄 높이 */
+    /* 한줄 한줄에 대한 높이 설정 */
+    line-height: 100px;
+
+    /* 크기 */
+    /* 반응형 : min-width, max-width, min-height, max-height */
+    width: 300px;
+    height: 100px;
+
+    /* 테두리 */
+    /* 
+    border-style: solid;
+    border-width: 4px;
+    border-color: limegreen; 
+    */
+    
+    /* 단축 프로퍼티로 위에 3개 합치기 */
+    border: 4px solid limegreen;
+    /* border-top: 4px solid limegreen; */
+    /* border-radius: 50px; */
+
+    /* 여백 */
+    padding: 20px;
+    margin: 100px auto 100px auto;
+
+    /* 박스모델 */
+    /* 컨텐츠 영역만 박스로 지정하는데 박스 크기를 300, 100으로 지정했으니 컨텐츠 영역이 300x100을 전부 차지 */
+    box-sizing: content-box; 
+
+    /* border + padding + content 의 크기가 300*100 이 됩니다. */
+    /* box-sizing: border-box; */
+}
+

@@ -1,0 +1,62 @@
+body {
+    margin : 0;
+    padding: 0;
+    padding-bottom: 100;
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 100px;
+}
+
+/* 
+static: 기본값
+    - inline 요소; 왼 -> 오 쌓임
+    - block 요소: 위 -> 아래 쌓임
+*/
+
+.position-static {
+    background-color: pink;
+    position: static;
+}
+
+/* relative 는 채워넣는 느낌, 현재위치를 기준으로 이동 한다. */
+.position-relative{
+    background-color: aquamarine;
+    position: relative;
+    /* right: 200px; */
+    /* bottom: 100px; */
+    /* top: 100px; */
+    left: 200px;
+    
+    
+}
+
+/* absolute: 절대위치 
+    position 속성을 갖는 제일 가까운 조상 기준
+    position 속성을 갖는 조상이 없다면? body를 기준으로 합니다.
+    -> "특정 요소"를 기준삼아서 top, ~~ right 씩 움직이겠다.
+
+    기준이 무엇인지 중요하다.
+*/
+.position-absolute {
+    background-color: gold;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+
+/* fixed: 고정 위치
+    - viewport(디바이스,브라우저 화면 전체)를 기준으로 특정 위치에 배치합니다.
+    - 스크롤 되어도 움직이지 않습니다.
+*/
+.position-fixed {
+    background-color: coral;
+    position: fixed;
+    top: 0;
+    right: 0;
+}

@@ -1,0 +1,36 @@
+/* 전체선택자 */
+* {
+    color: navy;
+}
+
+/* 태그선택자 */
+h1 {
+    background-color: green;
+}
+
+/* 클래스선택자 */
+.second {
+    background-color: orange;
+}
+
+.small {
+    font-size: 10px;
+}
+
+.big {
+    font-size: 20px;
+}
+
+/* ID선택자 */
+#first {
+    background-color: aqua;
+}
+
+/* 
+class 와 id 차이
+ - class : 그룹
+ - id : 고유
+
+class는 여러 요소에 같은 값을 사용할 수 있고,
+id 는 한 요소에만 사용해야 한다. 
+*/

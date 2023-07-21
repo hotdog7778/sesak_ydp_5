@@ -1,0 +1,85 @@
+.div1 {
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+}
+
+
+/* hover : 요소에 마우스를 올렸을때 */
+.div1:hover {
+    background-color: hotpink;
+    height: 150px;
+}
+
+/* active : 요소를 마우스로 클릭하고 있을 때 */
+.div1:active {
+    background-color: brown;
+    width: 150px;
+}
+/* hover와 active 의 순서는 의미가 있다. */
+
+/* focus : 요소에 포커스가 됐을 때 */
+input:focus {
+    background-color: blueviolet;
+    color : white;
+    outline-color: black;
+}
+
+.links > a:hover {
+    background-color: coral;
+}
+
+.links > a:visited {
+    background-color: #ccc;
+}
+
+/* 요소 상황에 따른 가상 선택자 */
+.zoo > * {
+    background-color: green;
+    color: white;
+}
+
+/* li 가 마지막 요소라면 */
+.zoo > li:last-child {
+    background-color: black;
+}
+
+/* *가 첫번째 요소라면 */
+.zoo > *:first-child {
+    background-color: red;
+}
+
+/* *가 div 가 아니라면 선택 */
+.zoo > *:not(div) {
+    background-color: pink;
+}
+
+/* *가 2번째 요소라면 선택 */
+.zoo > *:nth-child(2) {
+    background-color: aqua;
+}
+
+.box::before {
+    content: '택시~ ';
+    color: blue;
+    font-weight: bold;
+}
+
+.box::after {
+    content: ' 빨리';
+    color: red !important;
+    font-weight: bold;
+}
+
+[disabled] {
+    background-color: red;
+}
+
+[placeholder="이름"] {
+    background-color: orange;
+}
+
+/* input 태그인데 placeholder 속성이 없으면 실행 */
+input:not([placeholder]) {
+    background-color: blue;
+}

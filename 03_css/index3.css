@@ -1,0 +1,46 @@
+/* 하위 선택자 */
+/* 하위요소 전부 */
+body section {
+    border: 1px solid blue
+}
+body section h2 {
+    border: 1px solid green;
+}
+
+/* 자식 선택자 */
+/* 바로 아래 자식만 선택 */
+.first > h2 {
+    color:white;
+    background-color: navy;
+}
+.second > h2 {
+    color:white;
+    background-color: saddlebrown;
+}
+
+/* 인접 형제 선택자 */
+/* 바로 뒤에있는 같은 형제를 선택 */
+/* kong id 바로 아래에 li 가 있을때만 적용 됩니다. */
+/* html 에서 <span>test</span> 를 빼주거나 주석처리하면 정상 작동 합니다.  */
+#kong + li {
+    background-color: aqua;
+}
+
+/* 일반 형제 선택자 */
+/* 뒤에있는 형제요소 모두 선택 */
+#kong ~ li {
+    color: rgb(255, 0, 0);
+    /* color: #ff0000; */
+    /* color: red */
+}
+
+/* 
+CSS 색상 
+1. 색상 키워드 : red, blue ...
+2. 16진수 코드 : #ff0000 ...
+3. rgb(0~255, 0~255, 0~255) : rgb(255, 255, 255)
+
+2번, 3번으로 표현할 수 있는 rgb 갯수는 같다. ff = 255
+*/
+
+

@@ -1,0 +1,33 @@
+/* p태그 형제중 라이언 클래스 선택 */
+p ~ .lion {
+    background-color: red;
+}
+
+/* div 하위 ul 하위 에서 lion 클래스 선택 */
+div ul .lion {
+    background-color: greenyellow;
+}
+
+/* id tiger 만 선택 */
+div #tiger {
+    background-color: yellow;
+}
+
+/* body 자식중 lion 클래스 모두 선택 */
+body .lion {
+    color: sienna;
+}
+
+/* div 안에 lion 전부 */
+div .lion {
+    font-weight: bold;
+}
+
+ul #tiger + li {
+    background-color: skyblue;
+}
+
+li.lion ~ li {
+    background-color: orange;
+}
+
