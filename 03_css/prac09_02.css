@@ -1,0 +1,20 @@
+div {
+    background-color: black;
+    color: white;
+    
+    width: 100px;
+    height: 100px;
+
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+div:hover {
+    width: 300px;
+    height: 300px;
+    
+    transition: all 1s;
+    transition-delay: 0.5ms;
+
+    
+}
