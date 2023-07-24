@@ -1,0 +1,55 @@
+.d-inline1 {
+    display: inline;
+    background-color: blue;
+}
+.d-inline2 {
+    display: inline;
+    background-color: red;
+}
+
+.d-block1 {
+    display: block;
+    background-color: green;
+    
+    width: 400px;
+}
+.d-block2 {
+    display: block;
+    background-color: aqua;
+
+    width: 300px;
+}
+
+/* 그냥 inline과 다르게 black 처럼 크기 조정도 가능함 */
+.d-inline-block1 {
+    display: inline-block;
+    background-color: blue;
+    
+    width: 400px;
+    height: 50px;
+
+    margin: 10px 10px 10px 10px; 
+    /* margin: 10px 20px >> 상하 10px 좌우 20px */
+}
+.d-inline-block2 {
+    display: inline-block;
+    background-color: red;   
+}
+
+.d-none {
+    display: none;
+    /* 공간도 사라지고 개발자도구에서 코드도 안나옵니다. */
+
+    background-color: lawngreen;
+    width: 150px;
+    height: 150px;
+}
+
+.box {
+    visibility: hidden;
+    /* 공간도 차지하고 있고 개발자도구에서 코드도 나온다. */
+
+    background-color: hotpink;
+    width: 150px;
+    height: 150px;
+}
