@@ -20,10 +20,10 @@
 * 0.1.2
     * HTML
 * 0.1.3
-    * ex
+    * CSS
 * 0.2.1
-    * ex
-    * ex
+    * CSS
+    * JavaScript
 * 0.2.2
     * ex
 
