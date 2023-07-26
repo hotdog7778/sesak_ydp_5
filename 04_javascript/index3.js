@@ -142,7 +142,7 @@ const cat = {
 console.log(cat); // object 출력
 
 // object의 속성(key)에 접근하는 방법
-// (1) 점 표기법
+// (1) 점 표기법. 점표기법으로는 변수를 사용할 수 없는것 같다. tempVal을 넣으니 언디파인남.
 console.log(cat.name);
 console.log(cat.age);
 console.log(cat.mew());
@@ -151,4 +151,22 @@ console.log(cat['name']);
 console.log(cat['age']);
 const tempVal = 'name';
 console.log(cat[tempVal]);
-console.log(cat.tempVal);
+
+// typeof : 자료형 확인할 수 있는 키워드
+console.log(typeof '문자'); // string
+console.log(typeof 1234); // number
+console.log(typeof 3.14); // number
+console.log(typeof true); // boolean
+console.log(typeof false); // boolean
+console.log(typeof null); // object ** 특이케이스 ** typeof null의 결과가 object인 것은 버그
+console.log(typeof undefined); // undefined
+console.log(typeof fruits);
+console.log(typeof cat);
+
+// 자신을 소개하는 object 형태의 변수를 선언
+let me = {
+  name: '김태균',
+  age: 32,
+  job: '백수',
+};
+console.log(me);
