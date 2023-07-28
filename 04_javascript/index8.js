@@ -88,3 +88,115 @@ console.log(arr2.join('-'));
 console.log('hello'.split(''));
 console.log('hello'.split('').reverse());
 console.log('hello'.split('').reverse().join(''));
+
+// 배열에서 반복문
+// - 기본 for문
+// - for of 문
+// - forEach() 메서드
+
+// 기본 for문
+const arr3 = [1, 2, 3, 5, 6, 7];
+const alphabets = ['a', 'b', 'c', 'd'];
+
+for (let a = 0; a < arr3.length; a++) {
+  console.log(arr3[a]);
+}
+
+// for of 문
+for (let alpha of alphabets) {
+  console.log(alpha);
+}
+
+console.log('----------------------');
+
+// forEach 문
+alphabets.forEach(function (alpha) {
+  console.log(alpha);
+});
+
+console.log('----------------------');
+
+// forEach 문
+alphabets.forEach(function (alpha, idx, arr) {
+  // alpha : 현재밸류값을 의미. 반복중 현재값
+  // idx : 반복중 현재의 인덱스 값
+  // arr : 반복하는 배열의 전체값
+  console.log(alpha);
+  console.log('인덱스는 :' + idx);
+  console.log(arr);
+});
+
+console.log('----------------------');
+
+// 배열의 합
+let numbers = [1, 2, 3, 4, 5, 6];
+var sum1 = 0;
+var sum2 = 0;
+var sum3 = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i]);
+  sum1 += numbers[i];
+}
+
+console.log('----------------------');
+
+for (let num of numbers) {
+  console.log(num);
+  sum2 += num;
+}
+
+console.log('----------------------');
+
+numbers.forEach((num) => {
+  sum3 += num;
+});
+
+console.log(sum1, sum2, sum3);
+
+console.log('----------------------');
+
+// map. filter, find 메서드
+const arr4 = [1, 2, 3, 4, 5];
+
+// arr4 배열의 모든 요소를 만나서 실행문을 수행한 후 리턴한다. 그러면 요소들의 값이 순차적으로 바뀌던가 할 수 있습니다.
+// map() 메서드는 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
+const mapResult = arr4.map(function (e) {
+  return e * 2;
+});
+console.log(mapResult);
+// 화살표 함수로 바꿔보기
+arr4.map((e) => e * 2);
+
+// filter()
+// filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
+// 테스트 통과한다는게 true라는거
+const filterResult = arr4.filter(function (e) {
+  return e > 2;
+});
+console.log(filterResult); // 결과로 배열요소 1,2 는 사라집니다.
+// 화살표 함수로 바꿔보기
+arr4.filter((e) => e > 2);
+
+// find()
+// find() 메서드는 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 undefined를 반환합니다.
+const findResult = arr4.find((k) => k > 2);
+console.log(findResult);
+// 일반 함수로 바꿔보기
+arr4.find(function (k) {
+  k > 2;
+});
+
+console.log('----------------------');
+
+// 실습 문제
+const words = ['dog', 'cat', 'rabbit', 'apple', 'wow'];
+// 1. 글자 수가 3개 초과인 단어만 필터링
+const result1 = words.filter((e) => e.length > 3);
+console.log(result1);
+
+// 2. 글자에 'a' 문자가 포함되어 있는 단어만 필터링
+const result2 = words.filter((e) => e.includes('a'));
+console.log(result2);
+// String.prototype.includes()
+// includes() 메서드는 하나의 문자열이 다른 문자열에 포함되어 있는지를 판별하고, 결과를 true 또는 false 로 반환합니다. 검색 시 대소문자를 구분합니다.
