@@ -37,7 +37,7 @@ console.log(document.querySelectorAll('[name="id"]'));
 // index, length 는 가지고 있습니다.
 // 배열과 달리 사용가능한 메서드가 제한
 
-// NodeList -> forEach(), for of 반복문 사용 가능 합니다.
+// NodeList -> forEach(), for of 반복문 사용 가능 합니다. (for in 과 for of는 좀 다르네)
 // NodeList 라 forEach() 가능한 케이스
 let nodeListExam = document.querySelectorAll('.pink');
 nodeListExam.forEach((e) => console.log(e));
