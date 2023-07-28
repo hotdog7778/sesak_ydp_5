@@ -200,3 +200,14 @@ const result2 = words.filter((e) => e.includes('a'));
 console.log(result2);
 // String.prototype.includes()
 // includes() 메서드는 하나의 문자열이 다른 문자열에 포함되어 있는지를 판별하고, 결과를 true 또는 false 로 반환합니다. 검색 시 대소문자를 구분합니다.
+
+// Object(객체) 반복문 for in
+// 객체의 key를 반복할 수 있는 구문
+const me = {
+  name: 'tgk',
+  gender: 'm',
+  age: '31',
+};
+for (let key in me) {
+  console.log(key, me[key]); // me[key] 는 value. 왜 me.key 는 안되지?
+}
