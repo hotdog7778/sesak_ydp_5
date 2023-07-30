@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습. 방명록 만들기</title>
+    <style>
+        div {
+            margin: 10px 10px;
+        }
+        table {
+            border: 1px solid black;
+            text-align: center;
+            width: 700px;
+            height: 100px;
+        }
+    </style>
+    <script defer src="./prac02.js"></script>
+</head>
+<body>
+    <h1>실습. 방명록 만들기</h1>
+    <p>방명록 입니다.</p>
+    <div>작성자 <input id="writer" type="text"></div>
+    <div>내용 <input id="content" type="text" size="70"></div>
+    <button id="add">작성</button>
+    <div>
+    <table border="1" cellspacing="0">
+        <th>번호</th>
+        <th>작성자</td>
+        <th>내용</th>
+        <th class="date">작성일</th>
+        <tr>
+            <td>1</td>
+            <td>홍길동</td>
+            <td>내용 예시 입니다.</td>
+            <td>작성일 예시 입니다.</td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>
