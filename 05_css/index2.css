@@ -1,0 +1,19 @@
+.box {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: wheat;
+}
+
+.my_center {
+  background-color: hotpink;
+  width: 300px;
+}
+
+.my_width {
+  background-color: gold;
+}
+
+.w-30 {
+  width: 30%;
+}
