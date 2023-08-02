@@ -37,6 +37,7 @@ namesJs.forEach((e) => {
 
 // jq li 요소 클릭시 배경 색상 skyblue
 namesJq.on('click', function () {
+  // jq는 foreach를 안써도 그냥 반복이 된다.
   // console.log($('this'));
   $(this).css('background-color', 'skyblue');
 });

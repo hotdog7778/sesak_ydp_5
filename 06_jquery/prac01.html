@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습. 이미지 바꾸기</title>
+
+    <!-- TODO: jQuery CDN 추가 -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="./prac01.js"></script>
+  </head>
+  <body>
+    <h1>이미지 바꾸기</h1>
+
+    <img class="fruit" src="./img/q.jpg" alt="" width="300" height="200" />
+    <br />
+    <button class="btn apple">사과</button>
+    <button class="btn bananas">바나나</button>
+    <button class="btn grapes">포도</button>
+    <button class="btn peaches">복숭아</button>
+
+    <script>
+      // TODO: 조건을 만족하는 jquery 코드 작성
+
+      // console.log($('.btn')); // 유사 배열
+      // jQuery 는 js와 다르게 배열 형태더라도 그냥 바로 이벤트 적용 가능!!
+
+      // 버튼이 있고 버튼을 돌아가며 이벤트 발생
+      // 이벤트 내부에서 이미지 태그를 생성
+      // 생성한 이미지태그에 원하는 HTML을 넣어서 저장
+      // 저장한걸 출력
+      // 이걸 this의 클래스에서 apple.banana 등을 불러와서 만들어보자
+
+      $('.btn').on('click', function () {});
+    </script>
+  </body>
+</html>
