@@ -29,6 +29,11 @@
   - JavaScript
 - 0.2.3
   - JavaScript
+- 0.3.1
+  - CSS. 미디어쿼리
+  - 부트스트랩. 그리드 시스템
+- 0.3.2
+  - JavaScript. library. jquery
 
 ## 정보
 
