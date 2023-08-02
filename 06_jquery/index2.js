@@ -248,10 +248,3 @@ function toggleClass() {
   //   document.querySelector('#hi').classList.toggle('bg-pink');
   $('$hi').toggleClass('bg-pink');
 }
-
-// 4. Form Event
-$('#todo-form').on('submit', function (zz) {
-  console.log(zz);
-  e;
-  // 지금 발생한 이벤트가 submit 이기 때문에 submit 이벤트의 기본동작인 새로고침을 막음
-});
