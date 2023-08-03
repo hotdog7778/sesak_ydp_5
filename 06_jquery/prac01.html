@@ -36,7 +36,13 @@
       // 저장한걸 출력
       // 이걸 this의 클래스에서 apple.banana 등을 불러와서 만들어보자
 
-      $('.btn').on('click', function () {});
+      $('.btn').on('click', function () {
+        let btnClass = $(this).attr('class');
+        let fruitArry = btnClass.split(' ');
+        let fruit = fruitArry[1];
+                
+        $('.fruit').attr('src',`./img/${fruit}.jpg`);
+      });
     </script>
   </body>
 </html>

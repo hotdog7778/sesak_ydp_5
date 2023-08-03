@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tablePracticeCalendar</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        table {
+            margin: 0;
+            width: 100%;
+
+        }
+
+        table tr * {
+            border: 1px solid rgb(196, 195, 195);
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <h1>실습. 스케줄 달력</h1>
+    <hr>
+    <div>날짜 : <input id="day" type="text" disabled></div>
+    <div>내용 : <input id="content" type="text"></div>
+    <button id="write">작성</button>
+    <button id="test">암거나</button>
+
+    <table align="center" cellspacing="0" cellpadding="10">
+        <caption style="color: green;">
+            <h3>2019년 6월</h3>
+        </caption>
+        <tr>
+            <td style="color: red;">日</td>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th style="color: blue;">土</td>
+        </tr>
+        <tr>
+            <td style="color: red;"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="color: blue;">1</td>
+        </tr>
+        <tr>
+            <td style="color: red;">2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td style="color: red;">6</td>
+            <td>7</td>
+            <td style="color: blue;">8</td>
+        </tr>
+        <tr>
+            <td style="color: red;">9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td style="color: blue;">15</td>
+        </tr>
+        <tr>
+            <td style="color: red;">16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td style="color: blue;">22</td>
+        </tr>
+        <tr>
+            <td style="color: red;">23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td style="color: blue;">29</td>
+        </tr>
+        <tr>
+            <td style="color: red;">30</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="color: blue;"></td>
+        </tr>
+    </table>
+
+    <script>
+        // 내용 초기화 함수
+        initContent = function () {
+            $('#content').val('');
+        }
+
+        // 선택된 셀 저장
+        let selectedCellJQ;
+        // let selectedCellJS;
+
+        // 내용을 선택한 셀에 붙여넣는 함수
+        let run = function () {
+            // 내용박스 문자열 체크
+            if ($.trim($('#content').val()) === '') {
+                initContent();
+                return
+            }
+
+            // 내용 input 박스에 작성된 문자열 변수에 저장
+            let contentBeforeTrim = $('#content').val();
+            // console.log(typeof content, content) // string
+
+            // $.trim(str) ** 글 앞뒤 공백 제거
+            let content = $.trim(contentBeforeTrim)
+
+            // 내용 빈값이면 리턴
+            // if (content === '') { 
+            //     initContent();
+            //     return 
+            // }
+
+            // 날짜 박스 체크
+            if ($('#day').val() === '' || selectedCellJQ === undefined) {
+                alert('달력에서 날짜를 클릭하세요.')
+                return
+            }
+
+            // 선택된 셀 자식으로 p태그 생성
+            selectedCellJQ.append(`<li style="color: black; text-align:left" >${content}</li>`);
+            // $(selectedCellJS).append('<p style="color: black;">1</p>');            
+
+            // 컨텐츠 내용만 지우기
+            initContent();
+        }
+
+        // 날짜 클릭 이벤트
+        $('td').on('click', function () {
+            selectedCellJQ = $(this);
+
+            // 달력에서 선택한셀의 문자열 값
+            let cellStr = $(this).html()
+            // console.log(cellStr, typeof cellStr)
+
+            // 달력에서 선택한셀의 문자열 값 중에서 날짜의 문자열값
+            let selectedDate = (cellStr.split('<'))[0]
+            // console.log(selectedDate, typeof selectedDate)
+
+            // 날짜 없는 셀은 return
+            if (selectedDate === '') { return }
+
+            // 달력에서 선택한 날짜 문자열만 input 박스에 insert
+            $('#day').val(selectedDate)
+
+            // 이번에 선택한 셀이 뭔지 변수에 저장해서 작성버튼 이벤트에 사용
+            selectedCellJQ = $(this);
+            // selectedCellJS = this;
+            // console.log(typeof selectedCellJS, selectedCellJS) // <td>...</td>
+            // console.log(typeof selectedCellJQ, selectedCellJQ) // ce.fn.init [td]
+        })
+
+        // 작성 클릭 이벤트
+        $('#write').on({
+            click: function () {
+                // check();
+                run();
+            },
+            // 이벤트 여러개 작성 가능
+            // keydown: function () {                
+            // }
+        })
+
+        // 키보드 입력 이벤트
+        $('#content').on({
+            keydown: function (e) {
+                if (e.key === 'Enter') {
+                    // check();
+                    run();
+                } else return
+            },
+        })
+
+
+        // test
+        let test = function () {
+            // if ($('#content').val() === '') { return }
+            if (selectedCellJQ !== undefined) {
+                selectedCellJQ.append(`<li style="color: black; text-align:left" >${Math.random()}</li>`)
+            }
+        }
+        $('#test').on('click', test)
+
+    </script>
+</body>
+
+</html>
