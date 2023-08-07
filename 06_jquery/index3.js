@@ -68,7 +68,7 @@ $('.div-hover').hover(function () {
 });
 
 // scroll()
-// 윈도우 창을 스크롤 할 떄
+// 윈도우 창을 스크롤 할 때
 // in jq
 
 // // case jq
@@ -105,7 +105,7 @@ $('.input-key').on('keydown', function (e) {
 // 4. Form Event
 $('#todo-form').on('submit', function (e) {
   //   console.log(e); // 이벤트 객체
-  e.preventDefault(); // 이벤트의 기본동작을 막는 메서드
+  e.preventDefault(); // 이벤트의 기본동작을 막는 메서드 (submit 이벤트의 기본동작은 새로고침)
   // 지금 발생한 이벤트가 "submit"이기 때문에 submit 이벤트의 기본 동작인 "새로고침"을 막음
 
   // 퀴즈

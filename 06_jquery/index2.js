@@ -212,13 +212,13 @@ function findPrev() {
 }
 
 function findChildren() {
-  // parent 클래스 갖는 요소의 자식 요소
+  // parent 클래스 갖는 요소의 자식 요소들을 HTMLCollection 형태로 반환
 
   // js
-  const js = document.querySelector('.parent').childNodes; // 노드리스트 형태로 요소들이 저장됨
-  //const el = document.querySelector('.parent').children; // HTMLCollection 형태로 요소들 저장
-  //const el = document.querySelector('.parent').childElementCount; // 자식수
-  console.log(js);
+  // const js = document.querySelector('.parent').childNodes; // 노드리스트 형태로 요소들이 저장됨
+  const el = document.querySelector('.parent').children; // HTMLCollection 형태로 요소들 저장
+  // const el = document.querySelector('.parent').childElementCount; // 자식수
+  console.log(el);
 
   // jq
   console.log($('.parent').children());
