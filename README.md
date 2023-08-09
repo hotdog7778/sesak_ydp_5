@@ -34,6 +34,13 @@
   - 부트스트랩. 그리드 시스템
 - 0.3.2
   - JavaScript. library. jquery
+- 0.3.3
+  - simple personal project
+- 0.4.1
+  - 서버와 클라이언트 개념 학습, 클라우드 서버 실습
+  - Nodejs
+- 0.4.2
+  - Nodejs
 
 ## 정보
 
