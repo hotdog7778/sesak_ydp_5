@@ -8,6 +8,12 @@ const PORT = 8000;
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+// 미들웨어 등록
+app.use('/views', express.static(__dirname + '/views')); 
+app.use('/public', express.static(__dirname + '/static')); 
+// app.use('브라우저경로', express.static(__dirname + '실제정적파일의 폴더 위치')); 
+
+
 // (임시) 데이터베이스에서 가져온 회원정보 (id,pw)
 const idFromDB = 'banana';
 const pwFromDB = '1234qwer'
