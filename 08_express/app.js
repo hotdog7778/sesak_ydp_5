@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 8080;
+const PORT = 8090;
 
 //
 app.set('view engine', 'ejs'); // 템플릿 엔진 종류 등록

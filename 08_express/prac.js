@@ -8,14 +8,27 @@ const PORT = 8000;
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+// (임시) 데이터베이스에서 가져온 회원정보 (id,pw)
+const idFromDB = 'banana';
+const pwFromDB = '1234qwer'
+
 app.get('/', function (req, res) {
-  res.render('main');
+  res.render('main', { 
+    userId: idFromDB,
+    userPw: pwFromDB,
+    btns: ['배', '감', '귤'],
+    isLogin: true,
+  });
 });
 app.get('/login', function (req, res) {
   res.render('login');
 });
 app.get('/signup', function (req, res) {
   res.render('signup');
+});
+
+app.get('/sesac', function (request, response) {
+  response.send('<h1>새싹 영등포캠퍼스 5기 수업중~</h1>');
 });
 
 app.listen(PORT, function () {
