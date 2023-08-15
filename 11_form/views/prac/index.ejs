@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GET으로 정보 받기</title>
+  </head>
+  <body>
+    <form action="/prac/join" method="get">
+      <div>이름<input type="text" name="name" /></div>
+      <legend>
+        성별
+        <fieldset>
+          <input type="radio" name="male" />남자
+          <input type="radio" name="female" />여자
+        </fieldset>
+      </legend>
+
+      <legend>
+        생년월일
+        <fieldset>
+          <div><input type="select" />년</div>
+          <div><input type="select" />월</div>
+          <div><input type="select" />일</div>
+        </fieldset>
+      </legend>
+
+      <legend>
+        관심사
+        <fieldset>
+          <div><input type="checkbox" name="travel" />여행</div>
+          <div><input type="checkbox" name="fashion" />패션</div>
+          <div><input type="checkbox" name="food" />음식</div>
+        </fieldset>
+      </legend>
+
+      <br />
+      <!-- <a href="/prac/join"><button>회원가입</button></a> -->
+      <button>회원가입</button>
+    </form>
+  </body>
+</html>
