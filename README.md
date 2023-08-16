@@ -40,7 +40,18 @@
   - 서버와 클라이언트 개념 학습, 클라우드 서버 실습
   - Nodejs
 - 0.4.2
-  - Nodejs
+  - Nodejs & Js
+    - 싱글스레드, stack, Non-Blocking IO, 모듈, HTTP 모듈
+- 0.4.3
+  - Nodejs & Js
+    - Express, GET & POST, EJS 템플릿엔진, 구조분해, 클래스
+- 0.5.1
+  - Js
+    - Callback, Promise, async-await
+  - ejs & Nodejs Express
+    - GET, POST
+- 0.5.2
+  - ejs & Nodejs Express
 
 ## 정보
 
