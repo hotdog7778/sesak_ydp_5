@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getForm', (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
   //
   res.render('result', {
     title: 'GET 요청',
@@ -24,9 +24,9 @@ app.get('/getForm', (req, res) => {
 });
 
 app.post('/postForm', (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   //res.send('POST 요청 성공');
-  res.render('result', {
+  res.render('postresult', {
     title: 'POST 요청',
     userInfo: req.body,
   });
@@ -39,6 +39,16 @@ app.get('/prac', (req, res) => {
 app.get('/prac/join', (req, res) => {
   res.render('prac/join', {
     memberInfo: req.query,
+  });
+});
+
+app.get('/postprac', (req, res) => {
+  res.render('postprac/index');
+});
+
+app.post('/postprac/join', (req, res) => {
+  res.render('postprac/join', {
+    postMemberInfo: req.body,
   });
 });
 
