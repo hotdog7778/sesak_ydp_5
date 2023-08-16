@@ -135,8 +135,8 @@ function sub(n) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
       const result = n - 1;
-      //resolve(result);
-      reject(new Error('에러당'));
+      resolve(result);
+      // reject(new Error('에러당'));
     }, 500);
   });
 }
@@ -148,9 +148,10 @@ add(4, 3)
   .then(function (result) {
     return sub(result);
   })
-  .then(function (result) {
-    console.log(result);
-  })
+  // .then(function (result) {
+  //   console.log(result);
+  // })
+  .then(console.log)
   .catch(function (error) {
     console.log(error);
   });
