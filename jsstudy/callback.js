@@ -17,10 +17,6 @@
 
 let myFunc = () => {
   console.log('나의 함수 내부 코드');
-  //   setTimeout(function () {
-  //     //console.log('나의 함수 내부에서 수행되는 비동기함수의 콜백 함수');
-  //     myFunc();
-  //   }, 1000);
 };
 
 // 비동기 함수인 setTimeout 함수를 호출
