@@ -32,17 +32,12 @@ app.post('/postForm', (req, res) => {
   });
 });
 
-// 메인 페이지
 app.get('/prac', (req, res) => {
   res.render('prac/index');
 });
 
 app.get('/prac/join', (req, res) => {
-  //res.send('GET 요청 성공');
-  //res.render('prac/index', info);
-  console.log(req.query);
   res.render('prac/join', {
-    title: 'GET 요청',
     memberInfo: req.query,
   });
 });
