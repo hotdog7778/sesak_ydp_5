@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- JQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>dynamic_form_practice</h1>
+
+    <form action="" name="register">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" />
+      <br />
+
+      성별
+      <input type="radio" name="gender" id="m" value="male" />
+      <label for="male">남</label>
+
+      <input type="radio" name="gender" id="f" value="female" />
+      <label for="female">여</label>
+      <br />
+
+      <button type="button" onClick="ajaxGet();">Ajax Get 제출</button>
+      <button type="button" onClick="ajaxPost();">Ajax Post 제출</button>
+    </form>
+
+    <div class="result"></div>
+
+    <script>
+      // frontend javascript
+      const resultBox = document.querySelector('div.result');
+
+      function ajaxGet() {
+        console.log('ajaxGet 함수 호출');
+
+        const form = document.forms['register'];
+        //console.log(form);
+        //console.dir(form);
+        //console.dir(form.name);
+        //console.dir(form.name.value);
+        //console.dir(form.gender);
+        //console.dir(form.gender.value);
+
+        const requestData = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+
+        //Ajax로 서버에 GET 요청 보내기
+        $.ajax({
+          type: 'get',
+          url: '/ajax',
+          data: requestData,
+          // success 이건 이렇게 쓰게 정해진것
+          success: function (reqQueryResult) {
+            resultBox.textContent = `${reqQueryResult.name} 님의  성별은 ${reqQueryResult.gender} `;
+          },
+        });
+      }
+
+      function ajaxPost() {
+        console.log('ajaxPost 함수 호출');
+
+        const form = document.forms['register'];
+
+        const requestData = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+
+        $.ajax({
+          type: 'post',
+          url: '/ajax',
+          data: requestData,
+          success: function (reqBodyResult) {
+            resultBox.textContent = `${reqBodyResult.name} 님의  성별은 ${reqBodyResult.gender} `;
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
