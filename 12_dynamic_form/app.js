@@ -40,3 +40,4 @@ app.listen(8888, () => console.log('서버시작'));
 // res.send("<h1>안뇽</h1>");
 // res.send(['apple', 'banana']);
 // res.json(req.body)
+// req.body의 데이터형태는 클라이언트가 보내준대로임
