@@ -1,14 +1,29 @@
-const http = require('http');
+const express = require('express');
+const dbCon = require('./db.con');
+const app = express();
 
-const hostname = '127.0.0.1';
-const port = 3000;
+//ejs
+app.set('view engine', 'ejs');
+app.set('/views', 'views');
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+//json
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//routing
+app.get('/', (req, res) => {
+  res.render('main');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.listen(8080, () => console.log('서버 시작'));
+dbCon.connect();
+
+// DB 연결 됐나 테스트해봄
+// let sql = 'DESC tb';
+// dbCon.query(sql, function (error, results, fields) {
+//   if (error) {
+//     console.error(error);
+//   }
+//   console.log(results);
+// });
+// dbCon.end();
