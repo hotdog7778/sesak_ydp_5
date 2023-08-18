@@ -19,4 +19,24 @@ app.post('/ajax', (req, res) => {
   res.send(req.body);
 });
 
+app.get('/axios', (req, res) => {
+  res.send(req.query);
+});
+app.post('/axios', (req, res) => {
+  res.send(req.body);
+});
+
+app.get('/fetch', (req, res) => {
+  res.send(req.query);
+});
+app.post('/fetch', (req, res) => {
+  res.send(req.body);
+});
+
 app.listen(8888, () => console.log('서버시작'));
+
+// res.send(req.body)
+// res.send("안뇽")
+// res.send("<h1>안뇽</h1>");
+// res.send(['apple', 'banana']);
+// res.json(req.body)
