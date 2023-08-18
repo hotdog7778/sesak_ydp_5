@@ -35,16 +35,40 @@
 
       <button type="button" onClick="ajaxGet();">Ajax Get 제출</button>
       <button type="button" onClick="ajaxPost();">Ajax Post 제출</button>
+      <br />
       <button type="button" onClick="axiosGet();">Axios Get 제출</button>
       <button type="button" onClick="axiosPost();">Axios Post 제출</button>
+      <br />
       <button type="button" onClick="fetchGet();">Fetch Get 제출</button>
       <button type="button" onClick="fetchPost();">Fetch Post 제출</button>
     </form>
 
     <div class="result"></div>
 
+    <hr />
+    <h1>OPEN API를 이용해 고양이 사진 랜덤 돌리기</h1>
+    <button onclick="changeImg()">랜덤</button>
+    <br />
+    <img
+      width="250"
+      height="250"
+      src="https://w7.pngwing.com/pngs/633/239/png-transparent-mario-mario.png"
+      alt="고양이"
+    />
+
     <script>
       // frontend javascript
+      const img = document.querySelector('img');
+      async function changeImg() {
+        const res = await axios({
+          method: 'get',
+          url: 'https://api.thecatapi.com/v1/images/search',
+        });
+        console.log(res);
+        const { data } = res;
+        img.src = data[0].url;
+      }
+
       const resultBox = document.querySelector('div.result');
 
       function ajaxGet() {
