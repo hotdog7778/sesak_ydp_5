@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- JQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Axios CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+    <title>Weather API</title>
+  </head>
+  <body>
+    <form action="" name="addr">
+      <div>ex] KOR Seoul</div>
+
+      <label for="country">국가코드</label>
+      <input type="text" name="country" id="country" />
+
+      <label for="city">도시</label>
+      <input type="text" name="city" id="city" />
+    </form>
+    <hr />
+    <button type="button" onClick="transGeo();" disabled>transGeo</button>
+    <button type="button" onClick="getWeather();">GET 날씨</button>
+    <hr />
+    <br />
+
+    <div class="weather"></div>
+
+    <script>
+      /* const transGeo = async () => {
+        const addr = document.forms['addr'];
+        const addrData = {
+          country: addr.country.value,
+          city: addr.city.value,
+        };
+        const { country, city } = addrData;
+        console.log(country, city);
+
+        const apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${apiKey}`;
+
+        const geoCode = await axios({
+          type: 'get',
+          url: apiUrl,
+        });
+        return geoCode.data;
+
+      }; */
+
+      const getWeather = async () => {
+        const apiKey = '77f026c66c35d4465cfd73d04f1c0ae7';
+
+        const addr = document.forms['addr'];
+        const addrData = {
+          country: addr.country.value,
+          city: addr.city.value,
+        };
+
+        const { country, city } = addrData;
+        const geoApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${apiKey}`;
+
+        try {
+          const geoResponse = await axios({ type: 'get', url: geoApiUrl });
+          const { lat, lon } = geoResponse.data[0];
+
+          const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+          const weatherResponse = await axios({
+            type: 'get',
+            url: weatherApiUrl,
+          });
+
+          const currentTemp = weatherResponse.data.main.temp;
+
+          document.querySelector(
+            '.weather'
+          ).textContent = `${city}의 현재 온도는 ${currentTemp}°C 입니다.`;
+        } catch (error) {
+          console.log('에러발생: ', error);
+        }
+      };
+    </script>
+  </body>
+</html>
