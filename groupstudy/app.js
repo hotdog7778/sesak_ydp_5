@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   res.render('main');
 });
 
-app.listen(8080, () => console.log('서버 시작'));
+app.listen(8081, () => console.log('8081 포트, 서버 시작'));
 dbCon.connect();
 
 // DB 연결 됐나 테스트해봄

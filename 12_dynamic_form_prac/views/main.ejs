@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- JQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Axios CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>실습1. axios get 회원가입</h1>
+    <form action="" name="join">
+      <label for="username">이름</label>
+      <input type="text" name="username" id="username" />
+      <br />
+
+      <fieldset>
+        <legend>성별</legend>
+        <input type="radio" name="gender" id="male" value="male" />
+        <label for="male">남자</label>
+        <input type="radio" name="gender" id="female" value="female" />
+        <label for="female">여자</label>
+      </fieldset>
+      <br />
+
+      <fieldset>
+        <legend>생년월일</legend>
+        <select name="birthYear" id="year">
+          <% for (let i = 0; i < 50; i++) { %>
+          <option value="<%= 2010 - i %>"><%= 2010 - i %></option>
+          <% } %>
+        </select>
+        <label for="year">년</label>
+        <select name="birthMonth" id="month">
+          <% for (let i = 1; i < 13; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+          <% } %>
+        </select>
+        <label for="month">월</label>
+        <select name="birthDay" id="day">
+          <% for (let i = 1; i < 31; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+          <% } %>
+        </select>
+        <label for="day">일</label>
+      </fieldset>
+      <br />
+
+      <fieldset>
+        <legend>관심사</legend>
+        <input type="checkbox" name="hobby" id="travel" value="travel" />
+        <label for="travle">여행</label>
+        <input type="checkbox" name="hobby" id="fashion" value="fashion" />
+        <label for="fashion">패션</label>
+        <input type="checkbox" name="hobby" id="food" value="food" />
+        <label for="food">음식</label>
+      </fieldset>
+      <br />
+      <button type="button" onClick="axiosGet();">회원가입_axios</button>
+      <button type="button" onClick="ajaxGet();">회원가입_ajax</button>
+      <button type="button" onClick="fetchGet();">회원가입_fetch</button>
+      <br />
+      <div class="joinResult"></div>
+    </form>
+
+    <hr />
+
+    <h1>실습2. axios post 로그인</h1>
+    <form action="" name="login">
+      <input
+        type="text"
+        name="id"
+        placeholder="ID는 최소 3글자"
+        required
+        minlength="3"
+      />
+      <input
+        type="password"
+        name="pw"
+        placeholder="PW는 최소 4글자"
+        required
+        minlength="4"
+      />
+      <br />
+      <br />
+      <button type="button" onClick="axiosPost();">로그인_axios</button>
+      <button type="button" onClick="ajaxPost();">로그인_ajax</button>
+      <button type="button" onClick="fetchPost();">로그인_fetch</button>
+      <br />
+      <div class="loginResult"></div>
+    </form>
+
+    <hr />
+
+    <h1>실습. OPEN API 사용</h1>
+    <br />
+    <a href="/weatherApi">Weather API</a>
+    <a href="/omdbApi">OMDb API</a>
+    <script>
+      const resultBox = document.querySelector('div.joinResult');
+      const loginResultBox = document.querySelector('div.loginResult');
+
+      async function axiosGet() {
+        console.log('axiosGet() 호출');
+        const form = document.forms['join'];
+
+        const requestData = {
+          username: form.username.value,
+          gender: form.gender.value,
+          birthYear: form.birthYear.value,
+          birthMonth: form.birthMonth.value,
+          birthDay: form.birthDay.value,
+          hobby: form.hobby.value,
+        };
+
+        const result = await axios({
+          method: 'get',
+          url: '/join',
+          params: requestData,
+        });
+        //console.log(result);
+        const { username, gender, birthYear, birthMonth, birthDay, hobby } =
+          result.data;
+
+        resultBox.textContent = `
+          username : ${username},
+          gender : ${gender},
+          birth date : ${birthYear}-${birthMonth}-${birthDay},
+          hobby : ${hobby}
+        `;
+      }
+
+      async function axiosPost() {
+        console.log('ajaxPost() 호출');
+        const form = document.forms['login'];
+
+        const requestData = {
+          id: form.id.value,
+          pw: form.pw.value,
+        };
+
+        const result = await axios({
+          method: 'post',
+          url: '/login',
+          data: requestData,
+        });
+
+        const { id, pw } = result.data;
+
+        loginResultBox.textContent = `id : ${id} , pw : ${pw}`;
+      }
+
+      async function ajaxGet() {
+        //회원가입 버튼 클릭시 동작하는 함수
+        //1. 폼 데이터를 선택해서 저장
+        //2. /join 으로 GET API 요청
+        //3. 요청에 응답받은 데이터를 HTML div태그에 삽입
+        const form = document.forms['join'];
+        //console.log(form.username.value);
+        const requestData = {
+          username: form.username.value,
+          gender: form.gender.value,
+          birthYear: form.birthYear.value,
+          birthMonth: form.birthMonth.value,
+          birthDay: form.birthDay.value,
+          hobby: form.hobby.value,
+        };
+
+        const result = await $.ajax({
+          type: 'get',
+          url: '/join',
+          data: requestData,
+          success: function (res) {
+            resultBox.textContent = `
+              username : ${res.username},
+              gender : ${res.gender},
+              birth date : ${res.birthYear}-${res.birthMonth}-${res.birthDay},
+              hobby : ${res.hobby}
+            `;
+          },
+        });
+      }
+
+      async function ajaxPost() {
+        const form = document.forms['login'];
+
+        const requestData = {
+          id: form.id.value,
+          pw: form.pw.value,
+        };
+
+        const result = await $.ajax({
+          type: 'post',
+          url: '/login',
+          data: requestData,
+          success: function (res) {
+            loginResultBox.textContent = `id : ${res.id} , pw : ${res.pw}`;
+          },
+        });
+      }
+
+      async function fetchGet() {
+        const form = document.forms['join'];
+
+        const requestData = {
+          username: form.username.value,
+          gender: form.gender.value,
+          birthYear: form.birthYear.value,
+          birthMonth: form.birthMonth.value,
+          birthDay: form.birthDay.value,
+          hobby: form.hobby.value,
+        };
+        const { username, gender, birthYear, birthMonth, birthDay, hobby } =
+          requestData;
+
+        fetch(
+          `/join?username=${username}&gender=${gender}&birthYear=${birthYear}&birthMonth=${birthMonth}&birthDay=${birthDay}&hobby=${hobby}`
+        )
+          .then((resultJson) => {
+            return resultJson.json();
+          })
+          .then((resultJs) => {
+            resultBox.textContent = `username=${username},
+            gender=${gender},
+            birthYear=${birthYear},
+            birthMonth=${birthMonth},
+            birthDay=${birthDay},
+            hobby=${hobby}`;
+          });
+      }
+
+      async function fetchPost() {
+        const form = document.forms['login'];
+        // console.log(form);
+        const requestData = {
+          id: form.id.value,
+          pw: form.pw.value,
+        };
+        // console.log(requestData);
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
+        })
+          .then((wrappedPromise) => {
+            // console.log(requestData);
+            // console.log(wrappedPromise); // 프로미스 객체
+            // console.log(wrappedPromise.json()); // 데이터
+            return wrappedPromise.json();
+          })
+          .then((data) => {
+            // console.log(data);
+            loginResultBox.textContent = `id = ${data.id}, pw = ${data.pw}`;
+          });
+      }
+    </script>
+  </body>
+</html>
