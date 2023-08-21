@@ -11,14 +11,12 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.render('main');
 });
-
 app.get('/join', (req, res) => {
   res.send(req.query);
 });
 app.post('/login', (req, res) => {
   res.send(req.body);
 });
-
 app.get('/omdbApi', (req, res) => {
   res.render('omdbApi');
 });

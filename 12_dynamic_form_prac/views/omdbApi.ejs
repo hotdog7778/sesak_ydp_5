@@ -3,7 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- JQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Axios CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>OMDb API</title>
   </head>
-  <body></body>
+  <body>
+    <a href="https://www.omdbapi.com/">The Open Movie Database API link</a>
+    <hr />
+    <br />
+    <form action="" name="movieForm">
+      <div>ex] frozen / 2013</div>
+
+      <label for="title">MovieTitle</label>
+      <input type="text" name="title" id="title" />
+
+      <label for="year">Year</label>
+      <input type="text" name="year" id="year" />
+    </form>
+    <hr />
+    <br />
+    <button type="button" onClick="transGeo();" disabled>transGeo</button>
+    <button type="button" onClick="getMovie();">Movie Database 가져오기</button>
+    <hr />
+    <br />
+
+    <div class="omdbResult"></div>
+
+    <script>
+      // https://www.omdbapi.com/?apikey=3e506b0d&s=frozen&y=2013
+      const getMovie = async () => {
+        const apiKey = '3e506b0d';
+        const form = document.forms['movieForm'];
+        const formData = {
+          title: form.title.value,
+          year: form.year.value,
+        };
+        const { title, year } = formData;
+
+        const omdbApiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${title}&y=${year}`;
+
+        const omdb = await axios({
+          type: 'get',
+          url: omdbApiUrl,
+        });
+
+        const dbArray = omdb.data.Search;
+        // console.log(dbArray);
+
+        dbArray.forEach((e) => {
+          const newDiv = document.createElement('div');
+          // const seq = 1;
+          newDiv.innerHTML = `
+          <div>
+            <div>제목: ${e.Title}</div>
+            <div>출시년도: ${e.Year}</div>
+            <div><img src="${e.Poster}" alt=""></div>
+          </div>`;
+          document.querySelector('.omdbResult').append(newDiv);
+        });
+      };
+    </script>
+  </body>
 </html>
