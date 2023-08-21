@@ -22,11 +22,11 @@
 
     <form action="" name="register">
       <label for="name">이름</label>
-      <input type="text" id="name" name="name" />
+      <input type="text" id="name" name="name" required />
       <br />
 
       성별
-      <input type="radio" name="gender" id="m" value="male" />
+      <input type="radio" name="gender" id="m" value="male" required />
       <label for="male">남</label>
 
       <input type="radio" name="gender" id="f" value="female" />
@@ -36,7 +36,9 @@
       <button type="button" onClick="ajaxGet();">Ajax Get 제출</button>
       <button type="button" onClick="ajaxPost();">Ajax Post 제출</button>
       <br />
-      <button type="button" onClick="axiosGet();">Axios Get 제출</button>
+      <button type="button" onClick="axiosGet();">
+        Axios Get 제출 (+form validation)
+      </button>
       <button type="button" onClick="axiosPost();">Axios Post 제출</button>
       <br />
       <button type="button" onClick="fetchGet();">Fetch Get 제출</button>
@@ -57,6 +59,7 @@
     />
 
     <script>
+      const resultBox = document.querySelector('.result');
       // frontend javascript
       const img = document.querySelector('img');
       async function changeImg() {
@@ -68,8 +71,6 @@
         const { data } = res;
         img.src = data[0].url;
       }
-
-      const resultBox = document.querySelector('div.result');
 
       function ajaxGet() {
         console.log('ajaxGet 함수 호출');
@@ -150,19 +151,31 @@
           name: form.name.value,
           gender: form.gender.value,
         };
+
         try {
-          const result = await axios({
-            method: 'get',
-            url: '/axios',
-            params: requestData,
-          });
-          const { name, gender } = result.data;
-          resultBox.textContent = `${name} 님의  성별은 ${gender}`;
-        } catch (err) {
-          console.log('Error!!!!!!!!!', err);
+          // 폼 유효성 검사
+          // name input에 입력된 값이 없다면, '이름을 입력해주세요!'
+          // gender radio btn을 선택하지 않았다면, '성별을 선택해주세요!'
+          // 둘 다 입력이 잘 되었다면, axios로 back에 요청 날리기
+
+          if (!form.name.checkValidity()) {
+            // !false
+            resultBox.textContent = '이름을 입력해주세요!';
+          } else if (!form.gender[0].checkValidity()) {
+            resultBox.textContent = '성별을 선택해주세요!';
+          } else {
+            const response = await axios({
+              method: 'get',
+              url: '/axios',
+              params: requestData,
+            }); // response: 서버의 응답 결과
+            const { name, gender } = response.data; // 객체 구조분해 할당
+            resultBox.textContent = `GET /axios 요청 완료!! ${name}님은 ${gender}이시죠?ㅎㅎ`;
+          }
+        } catch (error) {
+          resultBox.textContent = `알 수 없는 에러 발생! 다시 시도해주세요~`;
+          console.log('Error!', error);
         }
-        // console.log(name);
-        // console.log(gender);
       }
 
       // 이거 언디파인나는거 디버깅 해보기
