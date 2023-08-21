@@ -61,6 +61,22 @@ app.post('/upload', uploadDetail.single('userfile'), (req, res) => {
   // }
 });
 
+app.post('/upload/array', uploadDetail.array('userfiles'), (req, res) => {
+  console.log(req.files);
+  console.log(req.body);
+  res.send('file upload complete');
+});
+
+app.post(
+  '/upload/fields',
+  uploadDetail.fields([{ name: 'userfile1' }, { name: 'userfile2' }]),
+  (req, res) => {
+    console.log(req.files);
+    console.log(req.body);
+    res.send('file upload complete');
+  }
+);
+
 app.listen(PORT, function () {
   console.log(`Port ${PORT} is opening!`);
 });
