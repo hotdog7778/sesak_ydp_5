@@ -28,11 +28,14 @@
     </form>
     <hr />
     <button type="button" onClick="transGeo();" disabled>transGeo</button>
-    <button type="button" onClick="getWeather();">GET 날씨</button>
+    <button type="button" onClick="geo();">Geo 계산</button>
+    <button type="button" onClick="weather();">날씨 온도만</button>
+    <button type="button" onClick="postWeather();">날씨 데이터 JSON</button>
     <hr />
     <br />
 
     <div class="weather"></div>
+    <pre class="resultBox"></red>
 
     <script>
       /* const transGeo = async () => {
@@ -53,8 +56,86 @@
         return geoCode.data;
 
       }; */
+      const info = {
+        apiKey: '77f026c66c35d4465cfd73d04f1c0ae7',
+        addr: {
+          //country: document.forms['addr'].country.value,
+          //city: document.forms['addr'].city.value,
+        },
+        geo: {
+          lat: null,
+          lon: null,
+        },
+        apiUrl: {
+          //geo: `https://api.openweathermap.org/geo/1.0/direct?q=${this[addr][city]},${this[addr][country]}&limit=1&appid=${apiKey}`,
+          geo: 'https://api.openweathermap.org/geo/1.0/direct',
+          // https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+          weather: 'https://api.openweathermap.org/data/2.5/weather',
+        },
+      };
+
+      const setAddr = () => {
+        info.addr.country = document.forms['addr'].country.value;
+        info.addr.city = document.forms['addr'].city.value;
+      };
+
+      const getSetGeo = async () => {
+        await setAddr();
+        const resGeo = await axios({
+          method: 'get',
+          url: `${info['apiUrl']['geo']}?q=${info['addr']['city']},${info['addr']['country']}&limit=1&appid=${info['apiKey']}`,
+        });
+        info.geo.lat = resGeo.data[0].lat;
+        info.geo.lot = resGeo.data[0].lon;
+        return resGeo.data[0];
+      };
+
+      const geo = async () => {
+        const geo = await getSetGeo();
+        const { lat, lon } = geo;
+        document.querySelector(
+          '.resultBox'
+        ).innerHTML = `<div> lat = ${lat}, lon = ${lon} </div>`;
+      };
 
       const getWeather = async () => {
+        const geo = await getSetGeo();
+        const resWeather = await axios({
+          type: 'get',
+          url: `${info['apiUrl']['weather']}?lat=${geo['lat']}&lon=${geo['lon']}&appid=${info['apiKey']}&units=metric`,
+        });
+        return resWeather;
+      };
+
+      const weather = async () => {
+        const weatherRes = await getWeather();
+        document.querySelector(
+          '.resultBox'
+        ).innerHTML = `<div> ${weatherRes['data']['main']['temp']} </div>`;
+      };
+
+      const postWeather = async () => {
+        const result = await getWeather();
+        // console.log(result.data);
+
+        axios({
+          method: 'post',
+          url: '/weatherApi/json',
+          data: result.data,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then((response) => {
+          // Display the raw JSON data on the UI
+          document.querySelector('.resultBox').textContent = JSON.stringify(
+            response,
+            null,
+            2
+          );
+        });
+      };
+
+      /* const weather = async () => {
         const apiKey = '77f026c66c35d4465cfd73d04f1c0ae7';
 
         const addr = document.forms['addr'];
@@ -68,6 +149,7 @@
 
         try {
           const geoResponse = await axios({ type: 'get', url: geoApiUrl });
+          console.log(geoResponse);
           const { lat, lon } = geoResponse.data[0];
 
           const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
@@ -84,7 +166,7 @@
         } catch (error) {
           console.log('에러발생: ', error);
         }
-      };
+      };*/
     </script>
   </body>
 </html>

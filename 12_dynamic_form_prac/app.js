@@ -23,8 +23,10 @@ app.get('/omdbApi', (req, res) => {
 app.get('/weatherApi', (req, res) => {
   res.render('weatherApi');
 });
-app.post('/weatherApiJson', (req, res) => {
-  res.render(req.body);
+
+app.post('/weatherApi/json', (req, res) => {
+  //res.json(req.body);
+  res.send(req.body);
 });
 
-app.listen(8888, () => console.log('서버시작'));
+app.listen(8999, () => console.log('서버시작'));
