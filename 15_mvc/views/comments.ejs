@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>comments</title>
+  </head>
+  <body>
+    <!-- <span> comments </span> -->
+
+    <span> <%=comments%> </span>
+    <h1>댓글 목록 확인</h1>
+    <a href="/">홈으로</a>
+    <ul>
+      <% for (let key of comments) {%>
+      <li>
+        <b><%= key.userid %></b> -
+        <a href="/comment/<%= key.id %>"><%= key.comment %></a>
+      </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
