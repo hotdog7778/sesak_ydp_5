@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- JQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Axios CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      .result {
+        color: black;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>로그인</h1>
+
+    <form action="" name="loginInfo">
+      <label for="userId">id</label>
+      <input type="text" id="userId" name="userId" />
+      <br /><br />
+      <label for="userPw">pw</label>
+      <input type="password" id="userPw" name="userPw" />
+      <br /><br />
+
+      <button type="button" onClick="axiosPost();">로그인 (Axios Post)</button>
+      <br /><br />
+      <button type="button" onClick="">회원 가입 (페이지로 이동)</button>
+      <br /><br />
+    </form>
+
+    <div class="result"></div>
+
+    <script>
+      const resultBox = document.querySelector('.result');
+
+      async function axiosPost() {
+        const form = document.forms['loginInfo'];
+        const requestData = {
+          reqUserId: form.userId.value,
+          reqUserPw: form.userPw.value,
+        };
+
+        //console.log(requestData);
+        await axios({
+          method: 'post',
+          url: '/login',
+          data: requestData,
+        }).then((obj) => {
+          document.querySelector('.result').textContent = obj.data.msg;
+          document.querySelector('.result').style.color = obj.data.color;
+        });
+        //catch (err) {
+        // document.querySelector('.result').textContent = err.response.data.msg;
+        // document.querySelector('.result').style.color = err.response.data.color;
+        //console.log('에러요', err);
+        //}
+      }
+    </script>
+  </body>
+</html>

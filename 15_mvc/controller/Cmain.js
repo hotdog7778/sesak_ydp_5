@@ -1,21 +1,16 @@
 const Comment = require('../model/Comment');
 
-const comments = Comment.getCommentsAll();
-
-// exports.main = (req, res) => {};
-// exports.comments = (req, res) => {};
-// exports.comment = (req, res) => {};
-
 module.exports = {
   main: (req, res) => {
     res.render('index');
   },
   comments: (req, res) => {
     res.render('comments', {
-      comments: comments,
+      comments: Comment.getCommentsAll(),
     });
   },
   comment: (req, res) => {
+    const comments = Comment.getCommentsAll();
     const cmtId = Number(req.params.id);
 
     if (!comments[cmtId - 1]) {
@@ -27,3 +22,7 @@ module.exports = {
     });
   },
 };
+
+// exports.main = (req, res) => {};
+// exports.comments = (req, res) => {};
+// exports.comment = (req, res) => {};
