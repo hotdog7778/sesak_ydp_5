@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>페이지</title>
+    <!-- BootStrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <!-- JQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Axios CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      #wrapper {
+        height: 100%;
+      }
+      #footer {
+        position: relative;
+        transform: translateY(-100%);
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <!-- 헤더 -->
+    <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+        >
+          <a
+            href="/"
+            class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+          >
+            <svg
+              class="bi me-2"
+              width="40"
+              height="32"
+              role="img"
+              aria-label="Bootstrap"
+            >
+              <use xlink:href="#bootstrap"></use>
+            </svg>
+          </a>
+
+          <ul
+            class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+          >
+            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          </ul>
+
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input
+              type="search"
+              class="form-control form-control-dark text-bg-dark"
+              placeholder="Search..."
+              aria-label="Search"
+            />
+          </form>
+
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">
+              Login
+            </button>
+            <button type="button" class="btn btn-warning">Sign-up</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="b-example-divider"></div>
+
+    <br />
+    <p>작성된 데이터를 DB로</p>
+    <span>이름<input type="text" name="name" id="name" /></span><br />
+    <span>제목<input type="text" name="title" id="title" /></span><br />
+    <div>
+      <textarea cols="50" rows="10" name="content" id="content"></textarea>
+    </div>
+    <br />
+    <dir><button type="submit" onclick="toBackend()">등록</button></dir>
+    <br />
+
+    <p>DB에서 데이터를 가져와서 테이블에</p>
+    <table border="1 solid">
+      <tr>
+        <td>작성자</td>
+        <td>제목</td>
+      </tr>
+    </table>
+    <!-- 푸터 -->
+    <footer class="p-3 text-bg-dark mt-auto">
+      <div class="container"></div>
+    </footer>
+  </body>
+  <script>
+    // 등록 버튼을 누르면 작성된 데이터를 formdata로 만들어서 백엔드로 POST
+    const toBackend = async () => {
+      let name = $('#name').val();
+      let title = $('#title').val();
+      let content = $('#content').val();
+
+      const formData = new FormData();
+      formData.append('nameGive', name);
+      formData.append('titleGive', title);
+      formData.append('contentGive', content);
+
+      // console.log 로는 폼 데이터의 keys와 values 값들을 어디에도 확인할 수 없다.
+      // 왜냐하면 자바스크립트에서 FormData 객체란 단순한 객체가 아니며 XMLHttpRequest 전송을 위하여 설계된 특수한 객체 형태이기 때문이다. 그래서 간단하게 문자열 화할 수 없어, console.log를 사용하여 확인이 불가능한 것이다.
+      console.log(name, title, content);
+      console.log(formData);
+      console.log(formData.has('nameGive')); // true
+
+      // axios로 백엔드에게 넘겨주기
+      try {
+        const result = await axios.post('/insertDB', formData, {
+          headers: {
+            'Content-Type': 'application/json', // 필수: formData 전송 시 Content-Type 설정
+          },
+        });
+        console.log('응답 데이터:', result.data);
+      } catch (error) {
+        console.log(error);
+      }
+
+      // .then((data) => {
+      //   alert('백엔드로부터 받은데이터 보여줄 예정');
+      //   window.location.reload;
+      // });
+    };
+  </script>
+</html>
