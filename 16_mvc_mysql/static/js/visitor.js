@@ -23,7 +23,7 @@ const createVisitor = () => {
             <td>${name}</td>
             <td>${comment}</td>
             <td><button type="button">수정</button></td>
-            <td><button type="button">삭제</button></td>
+            <td><button type="button" onclick="deleteVisitor(this, ${id});">삭제</button></td>
         </tr>
     `;
 
@@ -31,5 +31,27 @@ const createVisitor = () => {
     //$('tbody').append(newVisitor);
     // Js로 html 붙여넣기
     tbody.insertAdjacentHTML('beforeend', newVisitor); // 왜 바로 생성안되지?
+  });
+};
+
+const deleteVisitor = (obj, id) => {
+  console.log(obj, id);
+
+  if (!confirm('삭제 하시겠습니까?')) {
+    return;
+  }
+
+  axios({
+    method: 'delete',
+    url: '/visitor',
+    data: {
+      id: id,
+    },
+  }).then((res) => {
+    console.log('delete 요청에 대한 응답', res.data);
+
+    alert('삭제 성공');
+
+    obj.parentElement.parentElement.remove();
   });
 };

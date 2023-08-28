@@ -11,7 +11,7 @@ const getVisitors = (req, res) => {
   });
 };
 
-const postVisitors = (req, res) => {
+const postVisitor = (req, res) => {
   console.log(req.body);
 
   visitor.postVisitor(req.body, (insertId) => {
@@ -24,8 +24,19 @@ const postVisitors = (req, res) => {
   });
 };
 
+const deleteVisitor = (req, res) => {
+  console.log(req.body);
+  const { id } = req.body;
+
+  visitor.deleteVisitor(id, (result) => {
+    console.log(result); // 성공했으면 result의 값은 true일것임.
+    res.send(result);
+  });
+};
+
 module.exports = {
   main,
   getVisitors,
-  postVisitors,
+  postVisitor,
+  deleteVisitor,
 };

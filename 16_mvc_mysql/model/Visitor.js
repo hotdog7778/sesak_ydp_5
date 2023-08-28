@@ -1,3 +1,4 @@
+const { compile } = require('ejs');
 const mysql = require('mysql');
 const conn = mysql.createConnection({
   host: '127.0.0.1',
@@ -32,7 +33,20 @@ const postVisitor = (data, callback) => {
   );
 };
 
+const deleteVisitor = (id, callback) => {
+  console.log('model >>', id);
+
+  conn.query(`delete from visitor where id = "${id}"`, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log('model >> ', rows);
+    callback(true);
+  });
+};
+
 module.exports = {
   getVisitors,
   postVisitor,
+  deleteVisitor,
 };
