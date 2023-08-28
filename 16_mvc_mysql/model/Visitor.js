@@ -1,9 +1,20 @@
-// (임시) DB로부터 데이터를 받아옴
-const getVisitors = () => {
-  return [
-    { id: 1, name: '홍길동', comment: '내가 왔다.' },
-    { id: 2, name: '이찬혁', comment: '으라차차' },
-  ];
+const mysql = require('mysql');
+const conn = mysql.createConnection({
+  host: '127.0.0.1',
+  port: '3306',
+  user: 'user98',
+  password: '1234',
+  database: 'sesac',
+});
+
+const getVisitors = (callback) => {
+  conn.query('select * from visitor', (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log('model >>', rows);
+    callback(rows);
+  });
 };
 
 module.exports = {
