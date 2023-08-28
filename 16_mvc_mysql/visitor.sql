@@ -33,3 +33,6 @@ create user 'user98'@'%' identified with mysql_native_password by '1234';
 -- 계정에 권한 부여
 grant all privileges on *.* to 'user98'@'%' with grant option;
 
+
+insert into visitor values 
+	(3, '고구마', '맛있엉');
