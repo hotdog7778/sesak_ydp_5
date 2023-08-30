@@ -1,5 +1,7 @@
 use sesac;
 
+drop table visitor;
+
 create table visitor (
 	id INT PRIMARY KEY NOT NULL auto_increment,
     name VARCHAR(10) NOT NULL,
