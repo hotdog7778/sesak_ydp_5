@@ -21,16 +21,16 @@
     </form>
 
     <!-- TODO: href 속성값 설정하기 -->
-    <a href="#">Register</a>
+    <a href="/user/signup">Register</a>
 
     <script>
       // TODO: [Login] 버튼 클릭시 서버에 로그인 요청하기
       // POST /user/signin
       function login() {
-        const inForm = document.forms['form_login'];
-        let userId = inForm.userid.value;
-        let userPw = inForm.password.value;
-        // console.log(userId, userPw);
+        const userDataForm = document.forms['form_login'];
+
+        let userId = userDataForm.userid.value;
+        let userPw = userDataForm.pw.value;
 
         axios({
           method: 'post',
@@ -40,14 +40,13 @@
             userPw,
           },
         }).then((response) => {
-          // console.log(response);
           if (response.data.success) {
-            const form = document.forms['form_info'];
-            form.userid.value = response.data.userInfo.userid;
-            // console.log(form);
-            form.submit();
+            const tempForm = document.forms['form_info'];
+            tempForm.userid.value = userId;
+
+            tempForm.submit();
           } else {
-            inForm.reset();
+            userDataForm.reset();
             alert(response.data.msg);
           }
         });

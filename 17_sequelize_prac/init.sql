@@ -17,7 +17,9 @@ create database codingon default character set utf8mb4 collate utf8mb4_unicode_c
 create table user (
     userid VARCHAR(10) PRIMARY KEY NOT NULL,
     name VARCHAR(10) NOT NULL,
-    pw VARCHAR(20) NOT NULL
+    pw VARCHAR(20) NOT NULL,
+    createdAt datetime NOT NULL,
+    updatedAt datetime NOT NULL
 );
 
 drop table user;
