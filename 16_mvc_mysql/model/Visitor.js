@@ -10,11 +10,11 @@ const conn = mysql.createConnection({
 });
 
 const getVisitors = (callback) => {
-  conn.query('select * from visitor', (err, rows) => {
+  conn.query('select * from visitor order by id desc', (err, rows) => {
     if (err) {
       throw err;
     }
-    console.log('model >>', rows);
+    // console.log('model >>', rows);
     callback(rows);
   });
 };
@@ -27,21 +27,45 @@ const postVisitor = (data, callback) => {
       if (err) {
         throw err;
       }
-      console.log('model >>', rows);
+      // console.log('model >>', rows);
       callback(rows.insertId);
     }
   );
 };
 
 const deleteVisitor = (id, callback) => {
-  console.log('model >>', id);
+  // console.log('model >>', id);
 
   conn.query(`delete from visitor where id = "${id}"`, (err, rows) => {
     if (err) {
       throw err;
     }
-    console.log('model >> ', rows);
+    // console.log('model >> ', rows);
     callback(true);
+  });
+};
+
+const getVisitor = (id, callback) => {
+  //console.log(id);
+  const sql = `select * from visitor where id = "${id}"`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    callback(rows[0]);
+  });
+};
+
+const updateVisitor = (obj, callback) => {
+  const sql = `
+    UPDATE visitor SET name="${obj.name}", comment="${obj.comment}" WHERE id=${obj.id}
+  `;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    callback();
   });
 };
 
@@ -49,4 +73,6 @@ module.exports = {
   getVisitors,
   postVisitor,
   deleteVisitor,
+  getVisitor,
+  updateVisitor,
 };

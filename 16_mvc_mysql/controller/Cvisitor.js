@@ -6,7 +6,7 @@ const main = (req, res) => {
 
 const getVisitors = (req, res) => {
   visitor.getVisitors((resultRows) => {
-    console.log('controller >>', resultRows);
+    // console.log('controller ???>>', resultRows);
     res.render('visitor', { data: resultRows });
   });
 };
@@ -34,9 +34,28 @@ const deleteVisitor = (req, res) => {
   });
 };
 
+const getVisitor = (req, res) => {
+  // console.log(req.params); // { id: '15' }
+  const { id } = req.params;
+  visitor.getVisitor(id, (result) => {
+    // console.log(result); // { id: 1, name: '홍길동', comment: '내가 왔다.' }
+    res.send(result);
+  });
+};
+
+const updateVisitor = (req, res) => {
+  // console.log(req.body); // { id: 15, name: '왜', comment: '바로화면에 안나와' }
+  visitor.updateVisitor(req.body, () => {
+    // console.log(result);
+    res.send({ isUpdated: true, msg: '수정 되었습니다.' });
+  });
+};
+
 module.exports = {
   main,
   getVisitors,
   postVisitor,
   deleteVisitor,
+  getVisitor,
+  updateVisitor,
 };

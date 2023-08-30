@@ -22,15 +22,16 @@ const createVisitor = () => {
             <td>${id}</td>
             <td>${name}</td>
             <td>${comment}</td>
-            <td><button type="button">수정</button></td>
-            <td><button type="button" onclick="deleteVisitor(this, ${id});">삭제</button></td>
+            <td><button type="button" onclick="editVisitor(${id})">수정</button></td>
+            <td><button type="button" onclick="deleteVisitor(this, ${id})">삭제</button></td>
         </tr>
     `;
 
     // 제이쿼리로 html 붙여넣기
     //$('tbody').append(newVisitor);
     // Js로 html 붙여넣기
-    tbody.insertAdjacentHTML('beforeend', newVisitor); // 왜 바로 생성안되지?
+    // tbody.insertAdjacentHTML('beforeend', newVisitor); // 왜 바로 생성안되지?
+    tbody.insertAdjacentHTML('beforebegin', newVisitor); // 왜 바로 생성안되지?
   });
 };
 
@@ -55,3 +56,60 @@ const deleteVisitor = (obj, id) => {
     obj.parentElement.parentElement.remove();
   });
 };
+
+const editVisitor = (id) => {
+  // console.log(id, '번 방명록 수정!!');
+
+  // 방명록 전체 데이터 조회
+  axios({
+    method: 'get',
+    url: `/visitor/${id}`,
+  }).then((response) => {
+    console.log(response.data);
+
+    const { name, comment } = response.data;
+    const form = document.forms['visitor-form'];
+    form.name.value = name;
+    form.comment.value = comment;
+  });
+
+  const btns = `
+    <button type="button" onclick="editDo(${id})">변경</button>
+    <button type="button" onclick="">취소</button>
+  `;
+
+  buttonGroup.innerHTML = btns;
+};
+
+const editDo = (id) => {
+  const form = document.forms['visitor-form'];
+  axios({
+    method: 'patch',
+    url: '/visitor',
+    data: {
+      id,
+      name: form.name.value,
+      comment: form.comment.value,
+    },
+  }).then((res) => {
+    //window.location.reload();
+    if (res.data.isUpdate) {
+      alert(res.data.msg);
+    }
+
+    const tr = document.querySelector(`#tr_${id}`).children;
+    tr[1].textContent = form.name.value;
+    tr[2].textContent = form.comment.value;
+
+    editCancel();
+  });
+};
+
+function editCancel() {
+  const form = document.forms['visitor-form'];
+  form.name.value = '';
+  form.comment.value = '';
+
+  const createBtn = `<button type="button" onclick="createVisitor()">등록</button>`;
+  buttonGroup.innerHTML = createBtn;
+}
