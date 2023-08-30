@@ -32,6 +32,8 @@ const createVisitor = () => {
     // Js로 html 붙여넣기
     // tbody.insertAdjacentHTML('beforeend', newVisitor); // 왜 바로 생성안되지?
     tbody.insertAdjacentHTML('beforebegin', newVisitor); // 왜 바로 생성안되지?
+
+    editCancel();
   });
 };
 
@@ -65,7 +67,7 @@ const editVisitor = (id) => {
     method: 'get',
     url: `/visitor/${id}`,
   }).then((response) => {
-    console.log(response.data);
+    console.log('???', response.data);
 
     const { name, comment } = response.data;
     const form = document.forms['visitor-form'];

@@ -1,8 +1,34 @@
-sequelize 란
+1. sequelize 란
 
 - 자바스크립트 구문을 알아서 SQL로 변환 해준다
 - ORM 라이브러리
+- 특정 DBMS에 종속적이지 않음
 
-ORM
+2. ORM
 
 - 실제 코드와 DB를 매핑해주는 도구
+
+3. 같은 프로젝트를 복제해서 다시하는 이유
+16번 mvc 프로젝트
+mysql 패키지를 이용해서 model 모듈이 db에 접근
+
+- sql문 사용
+- 콜백함수로 순서 지정
+
+17번 mvc 프로젝트
+sequelize 라이브러리를 쓰면서 sql을 직접 작성X
+sequelize 라이브러리는 프로미스 패턴 기반 비동기 제어 (코드가독성 향상)
+
+
+4.실습
+// 패키지 설치
+npm i sequelize sequelize-cli mysql2 
+
+// sequelize 사용전 리소스 구조 만들어줌
+npx sequelize init
+
+// database 의 테이블과 시퀄라이저의 모델이 대응되어야함
+모델 = 테이블 구조 라고 생각
+시퀄라이저를 사용할떄는 모델을 정의해야함
+시퀄라이저cli가 자동으로 만들어준 models 폴더 안에 모델 파일을 정의 (ex visitor라는 테이블을 사용 중이니 이테이블에 연결할 visitor 모델을 만들어봄)
+
