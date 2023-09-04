@@ -2,12 +2,14 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = 8000;
+const dotenv = require('dotenv');
+dotenv.config();
 
 app.set('view engine', 'ejs');
 
 // 미들웨어 등록
 // app.use(cookieParser()); // 일반 쿠키
-const COOKIE_SECRET_KEY = 'This is my secret key'; // 쿠키에 대한 비밀키
+const COOKIE_SECRET_KEY = process.env.COOKIE_SECRET_KEY; // 쿠키에 대한 비밀키
 app.use(cookieParser(COOKIE_SECRET_KEY)); // 암호화 쿠키
 const myCookieConf = {
   // httpOnly: 웹 서버를 통해서만 크키 접근 가능 (프론트에서 document.cookie로 접근을 차단)
