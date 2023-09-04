@@ -31,6 +31,11 @@ const Visitor = (Sequelize, DataTypes) => {
     }
   );
 
+  model.prototype.dateFormat = (date) => {
+    //moment 라이브러리를 이용하여 원하는 포맷으로 날짜 리턴
+    return moment(date).format('YYYY-MM-DD %H%i%s');
+  };
+
   return model;
 };
 

@@ -1,41 +1,51 @@
-// const visitor = require('../model/Visitor');
 const { Visitor } = require('../models');
+const moment = require('moment');
 
 const main = (req, res) => {
   res.render('index');
 };
 
 const getVisitors = async (req, res) => {
-  // [before]
-  // visitor.getVisitors((resultRows) => {
-  //   // console.log('controller ???>>', resultRows);
-  //   res.render('visitor', { data: resultRows });
-  // });
-
   const result = await Visitor.findAll();
-  console.log(result);
-  res.render('visitor', { data: result });
+
+  const formattedData = [];
+  for (const entry of result) {
+    const formattedEntry = {
+      id: entry.dataValues.id,
+      name: entry.dataValues.name,
+      comment: entry.dataValues.comment,
+      createdAt: moment(entry.dataValues.createdAt).format(
+        'YYYY년 MM월 DD일 <br> HH시 mm분'
+      ),
+      updatedAt: moment(entry.dataValues.updatedAt).format(
+        'YYYY년 MM월 DD일 <br> HH시 mm분'
+      ),
+    };
+    formattedData.push(formattedEntry);
+  }
+
+  //console.log(formattedData);
+  res.render('visitor', {
+    data: formattedData,
+  });
 };
 
 const postVisitor = async (req, res) => {
   // [after]
   const { name, comment } = req.body;
+
   const result = await Visitor.create({
     name,
     comment,
   });
-  // console.log(result);
-  res.send(result);
 
-  // [before]
-  // visitor.postVisitor(req.body, (insertId) => {
-  //   console.log('controller >>', insertId);
-  //   res.send({
-  //     id: insertId,
-  //     name: req.body.name,
-  //     comment: req.body.comment,
-  //   });
-  // });
+  res.send({
+    id: result.dataValues.id,
+    name: result.dataValues.name,
+    comment: result.dataValues.comment,
+    createdAt: moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분'),
+    updatedAt: moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분'),
+  });
 };
 
 const deleteVisitor = async (req, res) => {
@@ -63,7 +73,7 @@ const getVisitor = async (req, res) => {
   const result = await Visitor.findOne({
     where: { id: id },
   });
-  console.log(result);
+  // console.log(result);
   res.send(result);
 
   //
@@ -78,11 +88,16 @@ const getVisitor = async (req, res) => {
 const updateVisitor = async (req, res) => {
   // [after]
   // update({변경될 값},{where 절})
-  await Visitor.update(
+  const result = await Visitor.update(
     { name: req.body.name, comment: req.body.comment },
     { where: { id: req.body.id } }
   );
-  res.send({ isUpdated: true, msg: '수정 되었습니다.' });
+  const date = moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분');
+  res.send({
+    isUpdated: true,
+    msg: '수정 되었습니다.',
+    updatedAt: date,
+  });
 
   // // console.log(req.body); // { id: 15, name: '왜', comment: '바로화면에 안나와' }
   // visitor.updateVisitor(req.body, () => {

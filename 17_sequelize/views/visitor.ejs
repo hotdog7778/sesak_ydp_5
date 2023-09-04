@@ -44,6 +44,8 @@
           <th>방명록</th>
           <th>수정</th>
           <th>삭제</th>
+          <th>작성일</th>
+          <th>수정일</th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +64,8 @@
               삭제
             </button>
           </td>
+          <td><span class="created-at"><%- d.createdAt %></span></td>
+          <td><span class="updated-at"><%- d.updatedAt %></span></td>
         </tr>
         <% } %>
       </tbody>

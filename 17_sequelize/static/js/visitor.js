@@ -4,10 +4,10 @@ const tbody = document.querySelector('tbody');
 const buttonGroup = document.querySelector('#button-group');
 
 // POST 요청 (목적: DB에 저장하라고 백엔드에 데이터 넘겨주기)
-const createVisitor = () => {
+const createVisitor = async () => {
   const form = document.forms['visitor-form'];
   //console.log(form.name.value, form.comment.value);
-  axios({
+  await axios({
     method: 'POST',
     url: '/visitor',
     data: {
@@ -16,7 +16,7 @@ const createVisitor = () => {
     },
   }).then((res) => {
     console.log('post 요청에 대한 응답', res);
-    const { id, name, comment } = res.data;
+    const { id, name, comment, createdAt, updatedAt } = res.data;
     const newVisitor = `
         <tr id="tr_8">
             <td>${id}</td>
@@ -24,14 +24,12 @@ const createVisitor = () => {
             <td>${comment}</td>
             <td><button type="button" onclick="editVisitor(${id})">수정</button></td>
             <td><button type="button" onclick="deleteVisitor(this, ${id})">삭제</button></td>
+            <td><span class="created-at">${createdAt}</span></td>
+            <td><span class="updated-at" id="updated-at-${id}">${updatedAt}</span></td>
         </tr>
     `;
 
-    // 제이쿼리로 html 붙여넣기
-    //$('tbody').append(newVisitor);
-    // Js로 html 붙여넣기
-    // tbody.insertAdjacentHTML('beforeend', newVisitor); // 왜 바로 생성안되지?
-    tbody.insertAdjacentHTML('beforebegin', newVisitor); // 왜 바로 생성안되지?
+    tbody.insertAdjacentHTML('beforebegin', newVisitor);
 
     editCancel();
   });
@@ -66,10 +64,8 @@ const editVisitor = (id) => {
   axios({
     method: 'get',
     url: `/visitor/${id}`,
-  }).then((response) => {
-    console.log('???', response.data);
-
-    const { name, comment } = response.data;
+  }).then((res) => {
+    const { name, comment } = res.data;
     const form = document.forms['visitor-form'];
     form.name.value = name;
     form.comment.value = comment;
@@ -77,7 +73,7 @@ const editVisitor = (id) => {
 
   const btns = `
     <button type="button" onclick="editDo(${id})">변경</button>
-    <button type="button" onclick="">취소</button>
+    <button type="button" onclick="editCancel()">취소</button>
   `;
 
   buttonGroup.innerHTML = btns;
@@ -94,6 +90,7 @@ const editDo = (id) => {
       comment: form.comment.value,
     },
   }).then((res) => {
+    console.log(res);
     //window.location.reload();
     if (res.data.isUpdate) {
       alert(res.data.msg);
@@ -102,6 +99,7 @@ const editDo = (id) => {
     const tr = document.querySelector(`#tr_${id}`).children;
     tr[1].textContent = form.name.value;
     tr[2].textContent = form.comment.value;
+    tr[6].innerHTML = `<td><span class="updated-at" id="updated-at-${id}">${res.data.updatedAt}</span></td>`;
 
     editCancel();
   });
