@@ -41,10 +41,12 @@
           },
         }).then((response) => {
           if (response.data.success) {
-            const tempForm = document.forms['form_info'];
-            tempForm.userid.value = userId;
+            location.href = '/';
 
-            tempForm.submit();
+            // const tempForm = document.forms['form_info'];
+            // tempForm.userid.value = userId;
+
+            // tempForm.submit();
           } else {
             userDataForm.reset();
             alert(response.data.msg);

@@ -2,7 +2,15 @@ const { Member } = require('../models/index');
 
 // TODO: 컨트롤러 코드
 const renIndex = (req, res) => {
-  res.render('index');
+  if (req.session.user) {
+    res.render('index', {
+      isLogin: true,
+    });
+  } else {
+    res.render('index', {
+      isLogin: false,
+    });
+  }
 };
 
 const getSignUpPage = (req, res) => {
@@ -23,11 +31,21 @@ const signUp = async (req, res) => {
 };
 
 const getSignInPage = (req, res) => {
-  res.render('signin');
+  if (req.session.user) {
+    res.render('signin', {
+      isLogin: true,
+      user: req.session.user,
+    });
+  } else {
+    res.render('signin', {
+      isLogin: false,
+    });
+  }
 };
 const signIn = async (req, res) => {
   const reqBody = req.body;
   const { userId, userPw } = reqBody;
+
   try {
     const result = await Member.findAll({
       where: {
@@ -36,9 +54,17 @@ const signIn = async (req, res) => {
       },
     });
 
-    Boolean(result.length)
-      ? res.send({ success: true, msg: '로그인 성공' })
-      : res.send({ success: false, msg: '로그인 실패' });
+    if (result.length) {
+      req.session.user = userId;
+      // console.log(req.session.user);
+      res.send({ success: true, msg: '로그인 성공', isLogin: true });
+    } else {
+      res.send({ success: false, msg: '로그인 실패', isLogin: false });
+    }
+
+    // Boolean(result.length)
+    //   ? res.send({ success: true, msg: '로그인 성공' })
+    //   : res.send({ success: false, msg: '로그인 실패' });
   } catch (err) {
     res.send({ success: false, msg: '서버 에러' });
   }
@@ -87,6 +113,26 @@ const deleteProfile = async (req, res) => {
   }
 };
 
+const getUserProfile = async (req, res) => {
+  if (!req.session.user) {
+    console.log('로그인 이력없음');
+  }
+
+  try {
+    const result = await Member.findOne({
+      where: { userid: req.session.user },
+    });
+    //console.log(result.dataValues);
+    res.render('profile', {
+      success: true,
+      userInfo: result.dataValues,
+      isLogin: true,
+    });
+  } catch (err) {
+    res.send({ success: false, msg: '서버 에러' });
+  }
+};
+
 module.exports = {
   renIndex,
   getSignUpPage,
@@ -96,4 +142,5 @@ module.exports = {
   editProfile,
   deleteProfile,
   signUp,
+  getUserProfile,
 };
