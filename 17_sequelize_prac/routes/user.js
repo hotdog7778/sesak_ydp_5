@@ -13,15 +13,6 @@ router.get('/user/profile', ctrr.getUserProfile);
 router.post('/user/profile/edit', ctrr.editProfile);
 router.delete('/user/profile/delete', ctrr.deleteProfile);
 
-router.get('/logout', (req, res) => {
-  // TODO: 세션 삭제
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    res.redirect('/');
-  });
-});
+router.get('/logout', ctrr.logout);
 
 module.exports = router;

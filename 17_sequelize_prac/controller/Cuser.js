@@ -1,4 +1,5 @@
 const { Member } = require('../models/index');
+const bcrypt = require('bcrypt');
 
 // TODO: 컨트롤러 코드
 const renIndex = (req, res) => {
@@ -21,7 +22,9 @@ const signUp = async (req, res) => {
   const userInfo = req.body;
   //console.log(userInfo);
   // { userId: '', userPw: '', userNm: '' }
-  const { userId, userPw, userNm } = userInfo;
+  let { userId, userPw, userNm } = userInfo;
+  userPw = hashPassword(userPw);
+
   const result = await Member.create({
     userid: userId,
     name: userNm,
@@ -50,23 +53,37 @@ const signIn = async (req, res) => {
     const result = await Member.findAll({
       where: {
         userid: userId,
-        pw: userPw,
       },
     });
+    // userid로 레코드 조회 (id,pw(암호화된)가져옴)
+    // 가져온 암호 result[0].dataValues.pw
+    // 가져온 id result[0].dataValues.userid
 
     if (result.length) {
-      req.session.user = userId;
-      // console.log(req.session.user);
-      res.send({ success: true, msg: '로그인 성공', isLogin: true });
+      const passCheck = comparePassword(userPw, result[0].dataValues.pw);
+      if (passCheck) {
+        req.session.user = userId;
+        res.send({ success: true, msg: '로그인 성공', isLogin: true });
+      } else {
+        res.send({
+          success: false,
+          msg: '로그인 실패-암호 오류',
+          isLogin: false,
+        });
+      }
     } else {
-      res.send({ success: false, msg: '로그인 실패', isLogin: false });
+      res.send({
+        success: false,
+        msg: '로그인 실패-아이디 오류',
+        isLogin: false,
+      });
     }
 
     // Boolean(result.length)
     //   ? res.send({ success: true, msg: '로그인 성공' })
     //   : res.send({ success: false, msg: '로그인 실패' });
   } catch (err) {
-    res.send({ success: false, msg: '서버 에러' });
+    res.send({ success: false, msg: '서버 에러', isLogin: false });
   }
 };
 
@@ -133,6 +150,27 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.redirect('/');
+  });
+};
+
+// password 해싱 함수. hash된 패스워드를 리턴함
+const hashPassword = (password) => {
+  let saltRounds = 10;
+  return bcrypt.hashSync(password, saltRounds);
+};
+
+// 원문 비밀번호와 해시된 비밀번호가 일치하는 확인하는 함수
+const comparePassword = (password, hashedPassword) => {
+  return bcrypt.compareSync(password, hashedPassword);
+};
+
 module.exports = {
   renIndex,
   getSignUpPage,
@@ -143,4 +181,5 @@ module.exports = {
   deleteProfile,
   signUp,
   getUserProfile,
+  logout,
 };
