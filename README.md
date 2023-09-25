@@ -51,7 +51,34 @@
   - ejs & Nodejs Express
     - GET, POST
 - 0.5.2
-  - ejs & Nodejs Express
+  - Callback, Promise, async-await
+  - Form 유효성 검사
+  - falsy와 truthy
+- 0.5.3
+  - ajax, axios, fetch 를 사용한 동적 폼 전송
+  - OPEN AI 사용하기
+- 0.6.1
+  - Multer 를 사용해서 파일 업로드
+- 0.6.2
+  - mysql 설치
+  - npm mysql 클라이언트 패키지 사용
+  - SQL 학습
+- 0.6.3
+  - SQL 학습
+  - MVC 디자인 패턴
+- 0.7.1
+  - MVC 디자인 패턴으로 게시판 만들기
+- 0.7.2
+  - MVC 실습
+  - sequelize 라이브러리 실습
+- 0.7.3
+  - DB 테이블 관계 : 1:1, 1:N, N:M
+  - DB 테이블 관계를 sequelize에 적용
+  - 쿠키 설정
+- 0.8.1
+  - 환경변수 사용방법(dotenv 패키지)
+  - 세션 (express-session 패키지)
+  - 암호화 (crypto, bcrypt 패키지)
 
 ## 정보
 

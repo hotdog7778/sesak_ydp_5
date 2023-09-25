@@ -1,0 +1,12 @@
+{
+  "development": {
+    "username": "root",
+    "password": "q1w2e3r4!",
+    "database": "sesac",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "timezone": "Asia/Seoul"
+  },
+  "test": {},
+  "production": {}
+}

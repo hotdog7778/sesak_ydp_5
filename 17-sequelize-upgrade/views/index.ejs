@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 기타 메타 태그 및 제목은 여기에 추가 -->
+
+    <!-- axios CDN을 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Sequelize Home</h1>
+    <a href="/players">전체 선수 확인</a>
+
+    <!-- 데이터를 표시할 요소 추가 -->
+    <div id="playerData"></div>
+
+    <script>
+      // 특정 플레이어 데이터 가져오는 함수
+      function getPlayerData(playerId) {
+        axios
+          .get(`/players/${playerId}`)
+          .then((response) => {
+            const playerData = response.data;
+            console.log(response);
+            console.log(response.data);
+            // 플레이어 데이터를 화면에 표시
+            displayPlayerData(playerData);
+          })
+          .catch((error) => {
+            console.error(error);
+            // 에러 처리
+          });
+      }
+
+      // 플레이어 데이터를 화면에 표시하는 함수
+      function displayPlayerData(playerData) {
+        const playerInfo = `
+        <h2>플레이어 정보</h2>
+        <p>플레이어 ID: ${playerData.player_id}</p>
+        <p>이름: ${playerData.name}</p>
+        <p>나이: ${playerData.age}</p>
+        <p>생성 날짜: ${playerData.createdAt}</p>
+        <p>업데이트 날짜: ${playerData.updatedAt}</p>
+        <p>팀 ID: ${playerData.team_id}</p>
+      `;
+
+        // playerData 요소에 데이터 추가
+        document.getElementById('playerData').innerHTML = playerInfo;
+      }
+
+      // 페이지 로드 시 호출할 함수
+      window.onload = function () {
+        // 특정 플레이어 데이터 가져오기 (예: 플레이어 ID 1)
+        getPlayerData(1);
+      };
+    </script>
+  </body>
+</html>

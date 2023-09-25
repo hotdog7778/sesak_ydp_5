@@ -14,6 +14,8 @@ const getVisitors = async (req, res) => {
       id: entry.dataValues.id,
       name: entry.dataValues.name,
       comment: entry.dataValues.comment,
+      // createdAt: entry.dataValues.createdAt,
+      // updatedAt: entry.dataValues.updatedAt,
       createdAt: moment(entry.dataValues.createdAt).format(
         'YYYY년 MM월 DD일 <br> HH시 mm분'
       ),
@@ -21,11 +23,13 @@ const getVisitors = async (req, res) => {
         'YYYY년 MM월 DD일 <br> HH시 mm분'
       ),
     };
+    console.log(formattedEntry);
     formattedData.push(formattedEntry);
   }
 
   //console.log(formattedData);
-  res.render('visitor', {
+  // res.send('visitor', {
+  res.send({
     data: formattedData,
   });
 };
@@ -43,8 +47,10 @@ const postVisitor = async (req, res) => {
     id: result.dataValues.id,
     name: result.dataValues.name,
     comment: result.dataValues.comment,
-    createdAt: moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분'),
-    updatedAt: moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분'),
+    createdAt: result.dataValues.createdAt,
+    updatedAt: result.dataValues.updatedAt,
+    // createdAt: moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분'),
+    // updatedAt: moment(Date()).format('YYYY년 MM월 DD일 <br> HH시 mm분'),
   });
 };
 

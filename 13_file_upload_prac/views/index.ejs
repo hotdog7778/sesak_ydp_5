@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습 동작 예시</title>
+
+    <!-- TODO: axios cdn 불러오기 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+      /* TODO: CSS 정의 */
+      /* .joinform {
+        background-color: aquamarine;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- TODO: 파일 업로드를 위한 일반 폼 만들기 -->
+    <form
+      class="joinform"
+      action="/upload"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <input
+        type="text"
+        name="id"
+        placeholder="ID는 최소 3글자"
+        required
+        minlength="3"
+      /><br />
+      <input
+        type="password"
+        name="pw"
+        placeholder="PW는 최소 4글자"
+        required
+        minlength="4"
+      /><br />
+      <input type="text" name="name" placeholder="이름" /><br />
+      <input type="text" name="grade" placeholder="나이" /><br />
+      <input type="file" name="userfile" /><br />
+      <button type="submit">회원가입</button><br />
+    </form>
+  </body>
+</html>
