@@ -79,6 +79,31 @@
   - 환경변수 사용방법(dotenv 패키지)
   - 세션 (express-session 패키지)
   - 암호화 (crypto, bcrypt 패키지)
+- 0.8.2
+  - Git 협업 (팀프로젝트)
+  - 1st 팀프로젝트 진행
+- 0.8.3
+  - 팀프로젝트
+- 0.9.1 (9/11)
+  - Nodejs pm2 배포 (NCP)
+  - 팀프로젝트
+- 0.9.2
+  - 팀프로젝트
+- 0.9.3
+  - 팀프로젝트
+- 0.10.1 ~ 0.10.3
+  - 팀프로젝트
+- 0.11.1
+  - React
+  - React (Component & JSX & Props)
+- 0.11.2
+  - React (state)
+  - React (Event Handling)
+- 0.12.2
+  - . 
+- 0.12.2
+  - .
+
 
 ## 정보
 
