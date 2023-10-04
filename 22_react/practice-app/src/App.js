@@ -9,6 +9,14 @@ function App() {
   let [clr, setClr] = useState('white')
   let [textContent, setTextContent] = useState('글자글자')
 
+  // or 객체 형식
+  let [data, setData] = useState({
+    fruitImg: 'apple',
+    bgClr: 'black',
+    clr: 'white',
+    textContent: '글자글자',
+  })
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
