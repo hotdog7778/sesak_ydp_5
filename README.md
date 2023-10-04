@@ -100,7 +100,8 @@
   - React (state)
   - React (Event Handling)
 - 0.12.2
-  - . 
+  - React (Component - map, filter 활용) 
+  - React (ref, useRef)
 - 0.12.2
   - .
 
