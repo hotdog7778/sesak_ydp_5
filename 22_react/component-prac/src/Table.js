@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 
 export default function Table() {
+  const writerRef = useRef()
+  const titleRef = useRef()
 
   const [content, setContent] = useState([{
     idx: '번호',
@@ -21,7 +23,7 @@ export default function Table() {
   const [searchType, setSearchType] = useState('')
   const [searchData, setSearchData] = useState('')
   
-  //
+  // 검색
   function searching(searchData) {
     if(searchType === '번호'){
         const searchedContent = content.filter((arr) => 
@@ -44,20 +46,37 @@ export default function Table() {
     }
   }
 
+  // 포커스
+  function checkEmpty(ref1, ref2) {
+    if(!ref1.current.value) {
+        ref1.current.focus()
+        return true;
+    } else if (!ref2.current.value) {
+        ref2.current.focus()
+        return true;
+    }
+    return false;
+  }
+
   return (
     <>
         <fieldset>
-            작성자 : <input onChange={(e) => {
+            작성자 : <input ref={writerRef} onChange={(e) => {
                 // console.log(e.target.value)
                 setInputWriter(e.target.value)
                 }}/>
 
-            제목 : <input onChange={(e) => {
+            제목 : <input ref={titleRef} onChange={(e) => {
                 // console.log(e.target.value)
                 setInputTitle(e.target.value)
                 }}/>
             
             <button onClick={(e)=> {
+                const isEmpty = checkEmpty(writerRef, titleRef)
+                if(isEmpty){
+                    return;
+                }
+
                 const tempContent = {
                     idx: content.length,
                     title: inputTitle,
@@ -69,7 +88,7 @@ export default function Table() {
                 setContent(newContent)
                 //setInputTitle('')
                 //setInputWriter('')
-            }}>작성</button>
+            }} >작성</button>
         </fieldset>
         <br/>
         
@@ -97,7 +116,7 @@ export default function Table() {
             setSearch(false)
         }}>전체</button>
 
-        <table>
+        <table border="1">
         <tbody>
             {
                 (search ? searchContent : content).map((value) => (
