@@ -35,6 +35,7 @@ export default function Event_ex() {
 
   return (
     <div>
+        
         <input name='userName' placeholder='이름' 
             onChange={(e) => {
                 setInputName({
