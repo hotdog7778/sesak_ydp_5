@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Input from './Input';
 import Result from './Result';
 import Select from './Select';
+import TodoPractice from './components/TodoPractice';
 
 function App() {
   let [fruitImg, setImg] = useState('apple');
@@ -28,6 +29,11 @@ function App() {
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
         <Result fruitImg={fruitImg} bgClr={bgClr} clr={clr} textContent={textContent}/>
       </div>
+      
+      <br/>
+      <hr/>
+      <TodoPractice />
+
     </>
   );
 }
