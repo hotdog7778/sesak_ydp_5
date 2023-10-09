@@ -28,14 +28,6 @@ export default function TodoPractice() {
     }))
     setTodoList(newTodo)
   }
-//   const handleChecked = (id) => {
-//     const newTodos = todos.map((todo) => ({
-//       ...todo,
-//       checked: id === todo.id ? !todo.checked : todo.checked,
-//     }));
-//     setTodos(newTodos);
-//   };
-
 
   const deleteTodo = () => {
     const newTodo = todoList.filter((arr) => arr.checked === false)
