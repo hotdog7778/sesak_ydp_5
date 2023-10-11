@@ -45,13 +45,20 @@ function App() {
     ]);
   };
 
+  // 투두 리스트에서 투두 삭제
+  const deleteItem = (ItemId) => {
+    const temp = todoItems;
+    const newTodo = temp.filter((rowData) => rowData.id !== ItemId);
+    setTodoItems(newTodo);
+  };
+
   return (
     <div className="App">
       <AddTodo addItem={addItem} />
 
       {/* todoItems 반복, props로 데이터(투두 객체)를 자식 컴포넌트에게 전달 */}
       {todoItems.map((item) => {
-        return <Todo key={item.id} item={item} />;
+        return <Todo key={item.id} item={item} deleteItem={deleteItem} />;
       })}
     </div>
   );
