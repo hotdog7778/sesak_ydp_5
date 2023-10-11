@@ -1,5 +1,6 @@
 import SassComponent from './SassComponent';
 import StyledComponent from './StyledComponent';
+import MediaQeury from './components_sass_practice/MediaQeury';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <hr />
       <p>Styled-Component</p>
       <StyledComponent />
+      <hr />
+      <p>미디어쿼리 퀴즈 실습</p>
+      <MediaQeury />
     </div>
   );
 }

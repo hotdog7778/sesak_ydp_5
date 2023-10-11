@@ -1,0 +1,26 @@
+@import 'include-media';
+// @import './_utils';
+
+.boxContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  @include media('<768px') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media('<532px') {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  &.mbox {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  // @include box(100px);
+}
