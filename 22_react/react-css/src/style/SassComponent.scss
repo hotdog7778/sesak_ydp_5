@@ -51,7 +51,7 @@
 }
 
 .btn-primary {
-  // - 확장
+  // - 확장 : 기존 선택자 스타일을다른 선택자에게 상속 >> .btn 안에 정의된 css를 가져오는거임
   @extend .btn;
   background-color: $color-third;
 }
