@@ -1,4 +1,5 @@
 import SassComponent from './SassComponent';
+import StyledComponent from './StyledComponent';
 
 function App() {
   return (
@@ -7,6 +8,9 @@ function App() {
       <hr />
       <p>SASS</p>
       <SassComponent />
+      <hr />
+      <p>Styled-Component</p>
+      <StyledComponent />
     </div>
   );
 }
