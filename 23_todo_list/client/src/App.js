@@ -46,9 +46,8 @@ function App() {
   };
 
   // 투두 리스트에서 투두 삭제
-  const deleteItem = (ItemId) => {
-    const temp = todoItems;
-    const newTodo = temp.filter((rowData) => rowData.id !== ItemId);
+  const deleteItem = (item) => {
+    const newTodo = todoItems.filter((rowData) => rowData.id !== item.id);
     setTodoItems(newTodo);
   };
 
