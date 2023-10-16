@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import '../style/App.css';
 
 export default function Todo({ item, deleteItem, updateItem }) {
   const [todoItem, setTodoItem] = useState(item);

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Todo from './components/Todo';
 import AddTodo from './components/AddTodo';
 import axios from 'axios';
+import './style/App.css';
 
 function App() {
   // console.log(process.env.REACT_APP_DB_HOST);
@@ -76,8 +77,8 @@ function App() {
 
   return (
     <div className="App">
+      <div className="box-decoration-clone bg-gradient-to-r from-indigo-600 to-pink-500 text-white px-2">Todo List</div>
       <AddTodo addItem={addItem} />
-
       {/* todoItems 반복, props로 데이터(투두 객체)를 자식 컴포넌트에게 전달 */}
       {todoItems.map((item) => {
         return <Todo key={item.id} item={item} deleteItem={deleteItem} updateItem={updateItem} />;
