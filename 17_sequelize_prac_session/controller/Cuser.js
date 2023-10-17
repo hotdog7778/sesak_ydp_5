@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 
 // TODO: 컨트롤러 코드
 const renIndex = (req, res) => {
+  // 빈 세션 객체
+  console.log('empty >>>>', req.session);
+  console.log('empty >>>>', req.session.id);
+
   if (req.session.user) {
     res.render('index', {
       isLogin: true,
@@ -46,8 +50,10 @@ const getSignInPage = (req, res) => {
   }
 };
 const signIn = async (req, res) => {
-  const reqBody = req.body;
-  const { userId, userPw } = reqBody;
+  console.log(req.session.id);
+  console.log(req.session);
+
+  const { userId, userPw } = req.body;
 
   try {
     const result = await Member.findAll({
@@ -55,9 +61,6 @@ const signIn = async (req, res) => {
         userid: userId,
       },
     });
-    // userid로 레코드 조회 (id,pw(암호화된)가져옴)
-    // 가져온 암호 result[0].dataValues.pw
-    // 가져온 id result[0].dataValues.userid
 
     if (result.length) {
       const passCheck = comparePassword(userPw, result[0].dataValues.pw);
@@ -107,10 +110,7 @@ const editProfile = async (req, res) => {
   const { userId, userPw, userNm } = req.body;
 
   try {
-    await Member.update(
-      { name: userNm, pw: userPw },
-      { where: { userid: userId } }
-    );
+    await Member.update({ name: userNm, pw: userPw }, { where: { userid: userId } });
     res.send({ success: true, msg: '회원정보 업데이트 성공' });
   } catch (err) {
     res.send({ success: false, msg: '서버 에러' });
