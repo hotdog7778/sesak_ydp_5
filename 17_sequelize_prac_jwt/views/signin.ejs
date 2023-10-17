@@ -43,24 +43,25 @@
           console.log(response);
           if (response.data.success) {
             // location.href = '/tokenTest';
-            console.log(response.data.token);
-            const token = response.data.token;
+
+            //// 응답 쿠키로 JWT를 받을때
+            console.log(response);
+
+            //// 응답 본문으로 JWT를 받을때
+            // console.log(response.data.token);
+            // const token = response.data.token;
 
             // jwt 토큰을 쿠키에 저장
-            document.cookie = `jwt=${token}; path=/;`;
+            // document.cookie = `jwt=${token}; path=/;`;
 
             // 발급 받은 토큰으로 서버에게 검증 요청해보기
-            axios
-              .get('/tokenTest', {
-                headers: { authorization: token },
-              })
-              .then((res) => {
-                console.log(res);
-              });
-
-            // const tempForm = document.forms['form_info'];
-            // tempForm.userid.value = userId;
-            // tempForm.submit();
+            // axios
+            //   .get('/tokenTest', {
+            //     headers: { authorization: token },
+            //   })
+            //   .then((res) => {
+            //     console.log(res);
+            //   });
           } else {
             userDataForm.reset();
             alert(response.data.msg);

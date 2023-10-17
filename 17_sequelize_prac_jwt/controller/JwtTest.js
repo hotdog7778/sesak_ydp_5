@@ -93,11 +93,18 @@ const signIn = async (req, res) => {
         // issuer 는 발급자임.
         const token = jwt.sign({ id: result[0].userid }, JWT_SECRET, { expiresIn: '10m', issuer: 'NodeServer' });
         console.log('컨트롤러 >> ', token);
+
+        // 쿠키에 jwt를 담아서 보내보자
+        res.cookie('jwtCookie', token, {
+          maxAge: 30 * 60000,
+          httpOnly: true,
+        });
+
         res.send({
           success: true,
           msg: '로그인 성공, 토큰 발행되었음',
           isLogin: true,
-          token,
+          // token,
         });
       } else {
         res.send({
