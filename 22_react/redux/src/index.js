@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App3 from './App3';
+import App4 from './App4';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit'; // store를 정의하는 메서드 configureStore()
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -14,7 +14,7 @@ const store = configureStore({ reducer: rootReducer }, composeWithDevTools);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App3 />
+      <App4 />
     </Provider>
   </React.StrictMode>
 );
