@@ -76,3 +76,23 @@ const galaxy23: Phone<galaxyOption> = {
     isBuz: true,
   },
 };
+
+// 실습
+function sum1(x: number, y: number): void {
+  console.log(x + y);
+}
+sum1(5, 11); // 16
+
+function sum2(...arr: number[]): number {
+  let total = 0;
+  for (let num of arr) {
+    total += num;
+  }
+  return total;
+}
+console.log(sum2(1, 3, 5, 11)); // 20
+
+function arrElement<T>(arr: T[], y: number): boolean {
+  return arr.length > y ? true : false;
+}
+arrElement<string>(['a'], 1);
