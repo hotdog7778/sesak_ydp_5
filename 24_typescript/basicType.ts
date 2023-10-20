@@ -99,3 +99,118 @@ val2 = '바이';
 
 // 실습
 let newgame: readonly [object, boolean] = [{ name: '쇼트트랙', type: '혼성계주' }, true];
+
+// type && interface
+// 1. interface
+interface Student {
+  name: string;
+  isPassed: boolean;
+}
+
+const student1: Student = {
+  name: 'jinheyong',
+  isPassed: true,
+};
+
+const student2: object = {
+  name: 'jinheyong',
+  isPassed: true,
+  addr: 'seoul',
+};
+
+// interface 상속
+// type Score = 'A+' | 'A' | 'B' | 'C' | 'D' | 'F';
+enum Score {
+  Aplus = 'A+',
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  D = 'D',
+  F = 'F',
+}
+
+interface BaseballClub extends Student {
+  position: string;
+  height: number;
+  readonly backNumber?: number; // backNumber 키가 필수가 아니게 됨
+  [grade: number]: Score;
+}
+
+const otani: BaseballClub = {
+  name: 'otani',
+  isPassed: true,
+  position: 'pitcher',
+  height: 193,
+  backNumber: 17,
+  // 1: 'A+', // 학년: 점수
+  // 2: 'NP', // 학년: 점수
+  1: Score.A, // 학년: 점수
+};
+
+console.log(otani);
+
+otani.position = '투수';
+otani['height'] = 200;
+
+// otani.backNumber = '19'; // backNumber는 readonly인 키라서 변경 불가
+
+console.log(otani);
+
+// type vs enum
+type BreakPoint = 500 | 700 | 1000;
+enum BreakPointEnum {
+  SM = 500,
+  MD = 700,
+  LG = 1000,
+}
+
+// const width1: BreakPoint = 550
+const width1: BreakPointEnum = BreakPointEnum.SM;
+console.log(width1);
+
+// 교차 타입: 두개 이상의 타입을 합치는 것
+interface Toy {
+  name: string;
+  start(): void;
+}
+
+interface Car {
+  name: string;
+  color: string;
+  price: number;
+}
+
+type ToyCar = Toy & Car;
+const toyCar: ToyCar = {
+  name: 'tayo',
+  start() {
+    console.log('출발~~');
+  },
+  color: 'blue',
+  price: 5000,
+};
+
+// 2. type
+type Gender = 'F' | 'M';
+type Person = {
+  name: string;
+  age?: number;
+  like?: string[];
+  gender: Gender;
+};
+
+let daniel: Person = {
+  name: 'daniel',
+  age: 20,
+  gender: 'F',
+  like: ['minji', 'hani'],
+};
+
+// 실습
+interface Game {
+  title: string;
+  price: number;
+  category: string;
+  platform: string;
+  desc?: string;
+}
