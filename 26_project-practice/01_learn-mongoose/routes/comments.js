@@ -45,7 +45,7 @@ router
   .route('/:id')
   .patch(async (req, res, next) => {
     try {
-      const result = await Comment.update(
+      const result = await Comment.updateMany(
         {
           _id: req.params.id, // where 와 같음. 즉 _id 필드의 데이터가 req.params.id와 같은 다큐먼트를 찾는다.
         },
@@ -61,7 +61,7 @@ router
   })
   .delete(async (req, res, next) => {
     try {
-      const result = await Comment.remove({ _id: req.params.id });
+      const result = await Comment.deleteMany({ _id: req.params.id });
       res.json(result);
     } catch (err) {
       console.error(err);
