@@ -20,9 +20,7 @@
         <td style="color: {{room.owner}}">{{room.owner}}</td>
 
         <td>
-          <button data-password="{{'true' if room.password else 'false'}}" data-id="{{room._id}}" class="join-btn">
-            입장
-          </button>
+          <button data-password="{{'true' if room.password else 'false'}}" data-id="{{room._id}}" class="join-btn">입장</button>
         </td>
       </tr>
       {٪ endfor ٪}
@@ -33,9 +31,19 @@
 </fieldset>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+  // const chatSocket = io(`${window.location.origin}/chat`, {
+  //   extraHeaders: {
+  //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  //   },
+  // });
+
   const socket = io.connect('http://localhost:8005/room', {
     // 네임스페이스
     path: '/socket.io',
+    extraHeaders: {
+      // Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      Authorization: 'Bearer asdsad',
+    },
   });
 
   socket.on('newRoom', function (data) {

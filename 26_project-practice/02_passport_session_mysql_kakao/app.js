@@ -68,6 +68,7 @@ app.use((req, res, next) => {
 });
 
 // 에러처리 미들웨어
+// 마지막으로 로직처리하는 컨트롤러에서도 (req, res, next) 이런식으로 next 넣어줘야함
 app.use((err, req, res, nest) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};

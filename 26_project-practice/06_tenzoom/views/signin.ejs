@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include('include/include', { title: '로그인' })%>
+  <body>
+    <h1>로그인</h1>
+    <!-- 
+      [로그인] 버튼을 클릭하면 profile.ejs에서 특정 유저 정보를 보여주어야 하기 때문에 
+      userid 정보를 value에 저장(POST /user/signin 요청의 응답을 받은 후 수행)하여
+      폼(input)이 보이지 않도록 hidden 처리함
+    -->
+    <!-- <form name="form_info" action="/user/profile" method="POST">
+      <input type="hidden" name="userid" />
+    </form> -->
+
+    <form name="form_login">
+      <label for="userid">ID</label>
+      <input id="userid" type="text" name="userid" required /><br />
+      <label for="password">Password</label>
+      <input id="password" type="password" name="pw" required /><br />
+      <button type="button" onclick="login();">Login</button>
+    </form>
+
+    <!-- TODO: href 속성값 설정하기 -->
+    <a href="/user/signup">Register</a>
+
+    <script>
+      // TODO: [Login] 버튼 클릭시 서버에 로그인 요청하기
+      // POST /user/signin
+      async function login() {
+        const userDataForm = document.forms['form_login'];
+
+        let userId = userDataForm.userid.value;
+        let userPw = userDataForm.pw.value;
+
+        await axios({
+          method: 'post',
+          url: '/user/signin',
+          data: {
+            userId,
+            userPw,
+          },
+        }).then((response) => {
+          console.log(response);
+          if (response.data.success) {
+            // location.href = '/tokenTest';
+
+            //// 응답 쿠키로 JWT를 받을때
+            console.log(response);
+
+            //// 응답 본문으로 JWT를 받을때
+            // console.log(response.data.token);
+            // const token = response.data.token;
+
+            // jwt 토큰을 쿠키에 저장
+            // document.cookie = `jwt=${token}; path=/;`;
+
+            // 발급 받은 토큰으로 서버에게 검증 요청해보기
+            // axios
+            //   .get('/tokenTest', {
+            //     headers: { authorization: token },
+            //   })
+            //   .then((res) => {
+            //     console.log(res);
+            //   });
+          } else {
+            userDataForm.reset();
+            alert(response.data.msg);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

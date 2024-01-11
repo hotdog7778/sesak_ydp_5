@@ -3,6 +3,10 @@ const SocketIO = require('socket.io');
 module.exports = (server, app) => {
   const io = SocketIO(server, { path: '/socket.io' });
 
+  io.engine.on('initial_headers', (headers, req) => {
+    console.log('@@@@>>>', headers);
+  });
+
   app.set('io', io);
 
   const room = io.of('/room');
@@ -10,7 +14,8 @@ module.exports = (server, app) => {
 
   io.on('connection', (socket) => {
     // 웹소켓 연결시
-    console.log(socket);
+
+    console.log(socket.handshake.headers);
     const req = socket.request;
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     console.log('새로운 클라이언트 접속!', ip, socket.id, req.ip);
